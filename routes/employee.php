@@ -47,7 +47,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::get('/updateDepartment/{department}','updateDepartment')->name('updateDepartment');
                 Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
                 Route::get('/displayDepartment/{department}','displayDepartment')->name('displayDepartment');
-                Route::view('/addEquipment/{department_id}','employees.admins.departments.equipment.addEquipment')->name('addEquipment');
+                // Route::view('/addEquipment/{department_id}','employees.admins.departments.equipment.addEquipment')->name('addEquipment');
             });
 
             Route::controller(App\Http\Controllers\EmployeeControllers\ProfileController::class)->group(function(){
