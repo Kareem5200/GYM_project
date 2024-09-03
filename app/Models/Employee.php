@@ -34,7 +34,7 @@ class Employee extends Authenticatable
 
 
     public function users(){
-        return $this->belongsToMany(User::class,'trainer_user','trainer_id','user_id');
+        return $this->belongsToMany(User::class,'trainer_user','user_id','trainer_id');
     }
 
     public function department(){

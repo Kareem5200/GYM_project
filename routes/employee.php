@@ -68,12 +68,18 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::put('/editCategoryPrice/{category_id}/{department_id}','editCategoryPrice')->name('editCategoryPrice');
 
             });
+
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\AboutUsController::class)->group(function(){
                 Route::get('/aboutUs','aboutUs')->name('aboutUs');
                 Route::view('/addAboutUs','employees.admins.addAboutUs')->name('addAboutUs')->middleware('aboutUs');
                 Route::post('/createAboutUs','createAboutUs')->name('createAboutUs');
                 Route::get('/updateAboutUs/{aboutUs}','updateAboutUs')->name('updateAboutUs')->middleware('aboutUs');
                 Route::patch('/editAboutUs/{aboutUs}','editAboutUs')->name('editAboutUs');
+            });
+
+            Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\MembershipsControllers::class)->group(function(){
+
+            Route::get('/MembershipsWithoutTrainers','MembershipsWithoutTrainers')->name('MembershipsWithoutTrainers');
             });
         });
 

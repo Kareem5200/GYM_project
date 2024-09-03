@@ -64,6 +64,6 @@ class User extends Authenticatable
     }
 
     public function trainers(){
-        return $this->belongsToMany(Employee::class,'trainer_user','trainer_id','user_id');
+        return $this->belongsToMany(Employee::class,'trainer_user','user_id','trainer_id');
     }
 }
