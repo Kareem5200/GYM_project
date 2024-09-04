@@ -11,7 +11,7 @@ class MembershipsControllers extends Controller
 
     public function MembershipsWithoutTrainers(){
 
-        $memberships = Membership::with(['department:id,name','user:id,name','category:id,plan'])
+        $memberships = Membership::with(['department:id,name','user:id,name'])
         ->whereHas('user', function($query) {
             //User::query()->doesntHave('trainer');
             $query->doesntHave('trainers');
