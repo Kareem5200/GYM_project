@@ -64,7 +64,7 @@
                     <div class="nav-option option3">
 
 
-                        <a href="" class="text-decoration-none text-dark fw-bold">Membserships</a>
+                        <a href="{{ route('employees.MembershipsWithoutTrainers') }}" class="text-decoration-none text-dark fw-bold">Membserships</a>
                     </div>
 
                     <div class="nav-option option4">

@@ -18,7 +18,7 @@ class MembershipsControllers extends Controller
         })->get();
 
 
-        dd($memberships);
+        return view('employees.admins.memberships.memberships',compact('memberships'));
 
     }
 }

@@ -79,7 +79,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\MembershipsControllers::class)->group(function(){
 
-            Route::get('/MembershipsWithoutTrainers','MembershipsWithoutTrainers')->name('MembershipsWithoutTrainers');
+            Route::get('/Memberships','MembershipsWithoutTrainers')->name('MembershipsWithoutTrainers');
             });
         });
 
