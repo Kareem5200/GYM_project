@@ -58,7 +58,7 @@ class LoginController extends Controller
 
             return $request->wantsJson()
                 ? new JsonResponse([], 204)
-                : redirect('/employees/loginForm');
+                : redirect('/employees//loginForm');
 
         }
 

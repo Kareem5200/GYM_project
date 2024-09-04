@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\EmployeeControllers;
 
-use App\Helpers\CustomHelperFunctions;
 use App\Models\Aboutus;
 use App\Models\Employee;
 use App\Models\Department;
@@ -18,14 +17,14 @@ class AuthController extends Controller
 {
 
     //Function to store image in specific path
-    //  static public function storeImage(object $input,string $path):string{
+     static public function storeImage(object $input,string $path):string{
 
-    //     $extension = $input->getClientOriginalExtension();
-    //     $image_name = time().'.'.$extension;
-    //     $path = public_path().$path;
-    //     $input->move($path,$image_name);
-    //     return  $image_name;
-    // }
+        $extension = $input->getClientOriginalExtension();
+        $image_name = time().'.'.$extension;
+        $path = public_path().$path;
+        $input->move($path,$image_name);
+        return  $image_name;
+    }
 
     //return register view
     public function registerForm(){
@@ -44,8 +43,7 @@ class AuthController extends Controller
 
             if(empty($request->department_id)){
 
-
-                $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\employees_images/');
+                $data['image'] = $this->storeImage($request->image,'\images\employees_images/');
                 $data['password']=Hash::make($data['password']);
                 $employee = Employee::create($data);
                 Auth::guard('employees')->login($employee);
@@ -60,7 +58,7 @@ class AuthController extends Controller
 
             if(!empty($request->department_id)){
 
-                $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\employees_images/');
+                $data['image'] = $this->storeImage($request->image,'\images\employees_images/');
                 $data['type']='trainer';
                 $data['password']=Hash::make($data['password']);
                 $employee = Employee::create($data);

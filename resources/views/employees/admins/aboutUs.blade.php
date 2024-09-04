@@ -52,7 +52,8 @@
                     <td>{{ $aboutUs->phone1 }}</td>
                     <td>{{ $aboutUs->admins_key }}</td>
                     <td>{{ $aboutUs->trainers_key }}</td>
-                    <td><a href="{{ route('employees.updateAboutUs',$aboutUs->id) }}" class="btn btn-success">Update</a></td>
+                    <td><a href="{{ route('employees.updateAboutUs',$aboutUs->id) }}" class="btn btn-success">Update</a>
+                    </td>
 
                 </tr>
                 @endisset
@@ -64,10 +65,4 @@
     </div>
 </div>
 
-
-
-
 @endsection
-
-
-

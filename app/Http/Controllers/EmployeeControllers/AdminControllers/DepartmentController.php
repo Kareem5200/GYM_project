@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\DepartmentEquipment;
 use App\Http\Controllers\Controller;
 
-use App\Helpers\CustomHelperFunctions;
 use App\Http\Controllers\EmployeeControllers\AuthController;
 use App\Http\Requests\EmployeeRequests\DepartmentRequests\CreateRequest;
 use App\Http\Requests\EmployeeRequests\DepartmentRequests\UpdateRequest;
@@ -23,7 +22,7 @@ class DepartmentController extends Controller
     public function createDepartment(CreateRequest $request){
 
         $data = $request->all();
-        $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\departments/');
+        $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
         Department::create($data);
         return to_route('employees.departments')->with('success','Department added successfully');
 
@@ -49,13 +48,13 @@ class DepartmentController extends Controller
         }elseif($request->period == $department->period && !empty($request->image)){
 
             $data = $request->except('period');
-            $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\departments/');
+            $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
             $department->update($data);
             return to_route('employees.departments')->with('success','Department updated successfully');
         }
 
         $data = $request->all();
-        $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\departments/');
+        $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
         $department->update($data);
         return to_route('employees.departments')->with('success','Department updated successfully');
 
