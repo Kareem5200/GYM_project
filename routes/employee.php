@@ -79,7 +79,11 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\MembershipsControllers::class)->group(function(){
 
-            Route::get('/Memberships','MembershipsWithoutTrainers')->name('MembershipsWithoutTrainers');
+                Route::get('/Memberships','MembershipsWithoutTrainers')->name('MembershipsWithoutTrainers');
+                Route::get('/addMembership','addMembershipWithoutTrainer')->name('addMembershipWithoutTrainer');
+                Route::post('/createMembership','createMembershipWithoutTrainer')->name('createMembershipWithoutTrainer');
+                Route::get('/updateMembership/{membership_id}','updateMembershipWithoutTrainer')->name('updateMembershipWithoutTrainer');
+                Route::patch('/editMembership/{membership}','editMembershipWithoutTrainer')->name('editMembershipWithoutTrainer');
             });
         });
 

@@ -12,9 +12,9 @@ class Membership extends Model
     protected $fillable = [
         'start_date',
         'end_date',
-        'user_id ',
-        'category_id ',
-        'department_id ',
+        'user_id',
+        'category_id',
+        'department_id',
         'created_at',
         'updated_at',
     ];

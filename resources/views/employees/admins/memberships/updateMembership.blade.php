@@ -9,8 +9,9 @@
 @endsection
 
 @section('content')
-<form action="{{ route('employees.createMembershipWithoutTrainer') }}" method="POST">
+<form action="{{ route('employees.editMembershipWithoutTrainer',$membership_id) }}" method="POST">
     @csrf
+    @method('PATCH')
 
     <div class="grid grid-cols-8  gap-20  w-full">
     <div class="col-span-4 relative py-3 mx-5 my-4 sm:mx-auto">
@@ -21,7 +22,7 @@
                         class="h-14 w-14 bg-blue-200 rounded-full flex flex-shrink-0 justify-center items-center text-2xl font-mono">
                         i</div>
                     <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
-                        <h2 class="leading-relaxed">Create an Membership</h2>
+                        <h2 class="leading-relaxed">Update an Membership</h2>
                         <p class="text-sm text-gray-500 font-normal leading-relaxed capitalize">please make sure you'r
                             adding a correct data!
                         </p>
@@ -33,27 +34,6 @@
                         <div  class="alert alert-danger">{{ session('error') }}</div>
                     @endif
                     <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                        <div class="flex flex-col">
-                            <label class="leading-loose capitalize">User ID</label>
-                            <input type="number" name="user_id"
-                                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                placeholder="ie.151505" value="{{ old('user_id') }}">
-                                @error('user_id')
-                                    <div  class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose capitalize">department name</label>
-                            <select class="form-select" aria-label="Default select example" name="department_id">
-                                <option value="" selected>Open this select menu</option>
-                                @foreach ($departments as $department )
-                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                @endforeach
-                              </select>
-                              @error('department_id')
-                                <div  class="alert alert-danger">{{ $message }}</div>
-                              @enderror
-                        </div>
 
                         <div class="flex flex-col">
                             <label class="leading-loose capitalize">Category</label>
@@ -67,6 +47,7 @@
                                 <div  class="alert alert-danger">{{ $message }}</div>
                               @enderror
                         </div>
+
                         <div class="flex flex-wrap items-center space-x-4">
                             <div class="flex  flex-col">
                                 <label class="leading-loose">Start</label>
@@ -87,34 +68,12 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="flex flex-col">
-                                <label class="leading-loose">End</label>
-                                <div class="relative focus-within:text-gray-600 text-gray-400">
-                                    <input type="date" name=""
-                                        class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="26/02/2020">
-                                    <div class="absolute left-3 top-2">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div> --}}
+
                         </div>
+
 
                     </div>
                     <div class="pt-4 flex items-center space-x-4">
-                        {{-- <button
-                            class="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none">
-                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"></path>
-                            </svg> Clear
-                        </button> --}}
                         <button
                             class="bg-blue-400 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Create</button>
                     </div>

@@ -13,12 +13,12 @@
     <label for="">Category</label>
     <select class="form-select" name="category" aria-label="Default select example">
         <option selected>Open this select menu</option>
-        <option value="month">1 Month</option>
+        <option value="1month">1 Month</option>
         <option value="2months">2 Months</option>
         <option value="3months">3 Months</option>
         <option value="6months">6 Months</option>
         <option value="9months">9 Months</option>
-        <option value="year">1 Year</option>
+        <option value="1year">1 Year</option>
       </select>
 
       @error('category')

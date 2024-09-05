@@ -46,7 +46,7 @@
     <div>
         <h1 class="h3 text-slate-600">Memberships page</h1>
         <p class="capitalize mb-3 text-gray-400">Here all Memberships, if you want to add new Membership </p>
-        <a href="#"
+        <a href="{{ route('employees.addMembershipWithoutTrainer') }}"
             class=" w-fit text-white font-bold py-2 px-4 rounded-full bg-gradient-to-r flex from-slate-800 to-slate-400 border border-transparent transform hover:scale-110 hover:border-white transition-transform duration-3000 ease-in-out">
             Add Membership
         </a>
@@ -77,39 +77,37 @@
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">username</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">start date</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">end date</th>
-                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">status</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">department name</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Update Membership</th>
 
 
                 </tr>
             </thead>
             <tbody class="bg-white">
                 <!-- Membership Row -->
+                @forelse ($memberships as $membership )
+
                 <tr>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->id }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->user->name }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->start_date }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->end_date }}</td>
+                    {{-- <td class="py-4 px-6 border-b border-gray-200">
                         <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Active</span>
-                    </td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
+                    </td> --}}
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->department->name }}</td>
+                    @if ($membership->end_date < now())
+                        <td class="py-4 px-6 border-b border-gray-200"><a href="{{ route('employees.updateMembershipWithoutTrainer',$membership->id) }}" class="btn btn-success">Update</a></td>
+                    @else
+                         <td class="py-4 px-6 border-b border-gray-200">
+                        <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Active </span>
+                        </td>
+                    @endif
 
                 </tr>
-                <!-- Membership Row -->
-
-                <!-- Membership Row -->
-                <tr>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-                    <td class="py-4 px-6 border-b border-gray-200">
-                        <span class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Inactive</span>
-                    </td>
-                    <td class="py-4 px-6 border-b border-gray-200">test</td>
-
-                </tr>
+                @empty
+                    <td class="py-4 px-6 border-b border-gray-200">Has no memberships without trainers</td>
+                @endforelse
                 <!-- Membership Row -->
 
 
