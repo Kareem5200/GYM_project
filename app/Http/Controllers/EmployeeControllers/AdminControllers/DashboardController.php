@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $memberships = Membership::where('end_date','>=',now())->count();
         $departments = Department::where('status', 'active')->withCount('memberships')->get(['name']);
         $month_memberships = Membership::whereMonth('created_at','=',now()->month)->orWhere('updated_at','=',now()->month)
-        ->get(['end_date','start_date']);
+        ->get();
         return view('employees.admins.dashboard',compact('trainers_number','memberships','users_number','month_memberships','departments'));
     }
 }
