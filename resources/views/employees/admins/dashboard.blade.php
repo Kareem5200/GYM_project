@@ -91,7 +91,7 @@
             <div class="item1">
                 <h3 class="t-op-nextlvl">{{$membership->user->id }}</h3>
                 <h3 class="t-op-nextlvl">{{$membership->user->name }}</h3>
-               <h3 class="t-op-nextlvl">{{$membership->department->name }}</h3>
+                 <h3 class="t-op-nextlvl">{{$membership->department->name }}</h3>
                 <h3 class="t-op-nextlvl">{{ $membership->start_date }}</h3>
                 <h3 class="t-op-nextlvl">{{$membership->end_date }}</h3>
             </div>
