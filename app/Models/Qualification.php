@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Qualification extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'certification',
         'certification_date',
         'image',
-        'trainer_id ',
+        'trainer_id',
     ];
     public function trainer(){
         return $this->belongsTo(Employee::class,'trainer_id');

@@ -88,8 +88,11 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\ManageTrainerControllers::class)->group(function(){
 
-                Route::get('getTrainerMemberships/{employee}','getTrainerMemberships')->name('getTrainerMemberships');
-                Route::get('trainerProfile/{employee}','trainerProfile')->name('trainerProfile');
+                Route::get('getTrainerMemberships/{trainer}','getTrainerMemberships')->name('getTrainerMemberships');
+                Route::get('trainerProfile/{trainer}','trainerProfile')->name('trainerProfile');
+                Route::view('addQualification/{trainer_id}','employees.admins.trainers.addQualification')->name('addQualification');
+                Route::post('createQualification/{trainer_id}','createQualification')->name('createQualification');
+
             });
         });
 
