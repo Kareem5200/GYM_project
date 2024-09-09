@@ -70,10 +70,6 @@
 <div class="report-container">
     <div class="report-header">
         <h1 class="recent-Articles">Recent Memberships</h1>
-
-        <form action="">
-        <button class="view">View All</button>
-        </form>
     </div>
 
     <div class="report-body">
