@@ -114,7 +114,7 @@
                         d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
                 <div>
-                    <a href="{{ route('employees.index') }}" class="text-decoration-none text-dark fw-bold">
+                    <a href="{{ route('employees.index') }}" class="text-decoration-none text-white fw-bold">
                         Dashboard</a>
                 </div>
 
@@ -129,7 +129,7 @@
                 <div>
 
                     <a href="{{ route('employees.departments') }}"
-                        class="text-decoration-none text-dark fw-bold">Departments</a>
+                        class="text-decoration-none text-white fw-bold">Departments</a>
                 </div>
 
             </div>
@@ -144,7 +144,7 @@
             <div>
 
                 <a href="{{ route('employees.deactivatedDepartment') }}"
-                    class="text-decoration-none text-dark fw-bold">Deactivated Departments</a>
+                    class="text-decoration-none text-white fw-bold">Deactivated Departments</a>
             </div>
 
 
@@ -162,7 +162,7 @@
         <div>
 
             <a href="{{ route('employees.deactivatedTrainers') }}"
-                class="text-decoration-none text-dark fw-bold">Deactivated Trainers</a>
+                class="text-decoration-none text-white fw-bold">Deactivated Trainers</a>
         </div>
 
     </div>
@@ -177,7 +177,7 @@
                 <div>
 
                     <a href="{{ route('employees.MembershipsWithoutTrainers') }}"
-                        class="text-decoration-none text-dark fw-bold">Membserships</a>
+                        class="text-decoration-none text-white fw-bold">Membserships</a>
                 </div>
 
             </div>
@@ -190,7 +190,7 @@
                 </svg>
                 <div>
                     <a href="{{ route('employees.categories') }}"
-                        class="text-decoration-none text-dark fw-bold">Categories</a>
+                        class="text-decoration-none text-white fw-bold">Categories</a>
                 </div>
 
             </div>
@@ -202,8 +202,8 @@
                         d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
                 <div>
-                    <a href="{{ route('employees.index') }}" class="text-decoration-none text-dark fw-bold">
-                        <a href="" class="text-decoration-none text-dark fw-bold">Trainers</a>
+                    <a href="{{ route('employees.index') }}" class="text-decoration-none text-white fw-bold">
+                        <a href="" class="text-decoration-none text-white fw-bold">Trainers</a>
                 </div>
 
             </div>
@@ -216,7 +216,7 @@
                 </svg>
                 <div>
                     <a href="{{ route('employees.profile') }}"
-                        class="text-decoration-none text-dark fw-bold">Profile</a>
+                        class="text-decoration-none text-white fw-bold">Profile</a>
                 </div>
 
             </div>
@@ -229,7 +229,7 @@
                 </svg>
                 <div>
 
-                    <a href="{{ route('employees.aboutUs') }}" class="text-decoration-none text-dark fw-bold">About
+                    <a href="{{ route('employees.aboutUs') }}" class="text-decoration-none text-white fw-bold">About
                         us</a>
                 </div>
 
