@@ -38,4 +38,9 @@ class ManageTrainerControllers extends Controller
 
        return view('employees.admins.trainers.displayMemberships',compact('employee','users'));
     }
+
+    public function trainerProfile(Employee $employee){
+
+        return view('employees.admins.trainers.profile',compact('employee'));
+    }
 }

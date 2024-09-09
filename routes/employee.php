@@ -89,6 +89,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\ManageTrainerControllers::class)->group(function(){
 
                 Route::get('getTrainerMemberships/{employee}','getTrainerMemberships')->name('getTrainerMemberships');
+                Route::get('trainerProfile/{employee}','trainerProfile')->name('trainerProfile');
             });
         });
 
