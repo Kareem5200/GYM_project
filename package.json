@@ -17,6 +17,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.6.0"
+        "@fortawesome/fontawesome-free": "^6.6.0",
+        "preline": "^2.4.1"
     }
 }

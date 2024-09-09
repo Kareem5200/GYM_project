@@ -1,10 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./resources/**/*.{html,js,php}"],
+    darkMode: "class", // Use 'class' to enable dark mode with the dark class
+
+    content: [
+        "./resources/**/*.{html,js,php}",
+        "./node_modules/preline/dist/*.js",
+    ],
     theme: {
         extend: {},
     },
-    plugins: [],
+    plugins: [require("preline/plugin")],
 };
 module.exports = {
     darkMode: "selector",

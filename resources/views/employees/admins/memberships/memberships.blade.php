@@ -96,17 +96,18 @@
                         <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Active</span>
                     </td> --}}
                     <td class="py-4 px-6 border-b border-gray-200">{{ $membership->department->name }}</td>
-                    @if ($membership->end_date < now())
-                        <td class="py-4 px-6 border-b border-gray-200"><a href="{{ route('employees.updateMembershipWithoutTrainer',$membership->id) }}" class="btn btn-success">Update</a></td>
-                    @else
-                         <td class="py-4 px-6 border-b border-gray-200">
-                        <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Active </span>
+                    @if ($membership->end_date < now()) <td class="py-4 px-6 border-b border-gray-200"><a
+                            href="{{ route('employees.updateMembershipWithoutTrainer',$membership->id) }}"
+                            class="btn btn-success">Update</a></td>
+                        @else
+                        <td class="py-4 px-6 border-b border-gray-200">
+                            <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Active </span>
                         </td>
-                    @endif
+                        @endif
 
                 </tr>
                 @empty
-                    <td class="py-4 px-6 border-b border-gray-200">Has no memberships without trainers</td>
+                <td class="py-4 px-6 border-b border-gray-200">Has no memberships without trainers</td>
                 @endforelse
                 <!-- Membership Row -->
 
@@ -126,5 +127,7 @@
 @endsection
 
 @section('js')
+<script src="https://cdn.tailwindcss.com"></script>
+
 
 @endsection
