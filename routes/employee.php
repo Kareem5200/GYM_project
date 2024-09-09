@@ -24,7 +24,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
     Route::controller(App\Http\Controllers\EmployeeControllers\AuthController::class)->middleware(['guest:employees','guest'])->group(function(){
 
         Route::post('/register','register')->name('register');
-        Route::post('/login','login')->name('login');
+        Route::post('/login','login')->middleware('throttle:5,5')->name('login');
 
     });
 
