@@ -37,8 +37,9 @@
             <img src="{{ asset('images/employees_images/'.$trainer->image) }}" class="card-img-top" alt="trainer image">
             <div class="card-body">
                 <h5 class="card-title">{{ $trainer->name }}</h5>
-                <p class="card-text">Active Memberships : {{ $trainer->users->count() }}</p>
+                <p class="card-text">Active Memberships : {{ $trainer->users()->wherePivot('status','active')->count() }}</p>
                 <a href="#" class="btn btn-primary">Profile</a>
+                <a href="{{ route('employees.getTrainerMemberships',$trainer->id) }}" class="btn btn-primary">Memberships</a>
             </div>
         </div>
         @endforeach

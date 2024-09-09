@@ -69,6 +69,9 @@
                 <p class="mt-1 text-black text-xl text-bold  uppercase">
                     {{ $department->period }}
                 </p>
+                <p class="mt-1 text-black text-xl text-bold  uppercase">
+                    {{ $department->status }}
+                </p>
                 <div class="flex gap-4 my-5">
                     <button>
                         <a href="{{ route('employees.displayDepartment',$department->id) }}"
@@ -80,6 +83,15 @@
                             class=" px-3 py-1 bg-slate-700/40 hover:bg-slate-700  rounded-lg">Update</a>
 
                     </button>
+
+                    <form action="{{ route('employees.changeStatus',$department->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+
+                           <button  class=" px-3 py-1 bg-slate-700/40 hover:bg-slate-700  rounded-lg">
+                               Change status
+                            </button>
+                    </form>
                 </div>
             </div>
         </div>

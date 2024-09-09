@@ -15,5 +15,6 @@ class TrainerUser extends Model
     protected $fillable = [
         'trainer_id',
         'user_id',
+        'status'
     ];
 }

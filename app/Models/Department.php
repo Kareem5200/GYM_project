@@ -10,7 +10,7 @@ class Department extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'status	',
+        'status',
         'image',
         'period',
     ];
@@ -24,7 +24,7 @@ class Department extends Model
         return $this->belongsToMany(Equipment::class,'department_equipment','department_id','equipment_id');
     }
     public function categories(){
-        return $this->belongsToMany(Category::class,'category_department','category_id','department_id')->withPivot(['price','status']);
+        return $this->belongsToMany(Category::class,'category_department','department_id','category_id')->withPivot(['price','status']);
     }
     public function memberships(){
         return $this->hasMany(Membership::class,'department_id');

@@ -47,7 +47,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::get('/updateDepartment/{department}','updateDepartment')->name('updateDepartment');
                 Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
                 Route::get('/displayDepartment/{department}','displayDepartment')->name('displayDepartment');
-                // Route::view('/addEquipment/{department_id}','employees.admins.departments.equipment.addEquipment')->name('addEquipment');
+                Route::patch('changeStatus/{department}','changeStatus')->name('changeStatus');
             });
 
             Route::controller(App\Http\Controllers\EmployeeControllers\ProfileController::class)->group(function(){
@@ -84,6 +84,11 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::post('/createMembership','createMembershipWithoutTrainer')->name('createMembershipWithoutTrainer');
                 Route::get('/updateMembership/{membership_id}','updateMembershipWithoutTrainer')->name('updateMembershipWithoutTrainer');
                 Route::patch('/editMembership/{membership}','editMembershipWithoutTrainer')->name('editMembershipWithoutTrainer');
+            });
+
+            Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\ManageTrainerControllers::class)->group(function(){
+
+                Route::get('getTrainerMemberships/{employee}','getTrainerMemberships')->name('getTrainerMemberships');
             });
         });
 

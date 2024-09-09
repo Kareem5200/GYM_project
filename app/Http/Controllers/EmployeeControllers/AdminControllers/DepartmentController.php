@@ -61,8 +61,31 @@ class DepartmentController extends Controller
     }
 
     public function displayDepartment(Department $department){
+        
 
         return view('employees.admins.departments.displayDepartment',compact('department'));
+
+    }
+
+    public function changeStatus(Department $department){
+        if($department->status == 'active'){
+
+            $department->update([
+                'status'=>'deactive',
+            ]);
+            $department->trainers()->update([
+                'status'=>'deactive',
+            ]);
+
+        }else{
+            $department->update([
+                'status'=>'active',
+            ]);
+            $department->trainers()->update([
+                'status'=>'active',
+            ]);
+        }
+        return to_route('employees.departments')->with('success','Department updated successfully');
 
     }
 
