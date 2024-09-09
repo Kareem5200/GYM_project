@@ -69,9 +69,7 @@
                 <p class="mt-1 text-black text-xl text-bold  uppercase">
                     {{ $department->period }}
                 </p>
-                <p class="mt-1 text-black text-xl text-bold  uppercase">
-                    {{ $department->status }}
-                </p>
+         
                 <div class="flex gap-4 my-5">
                     <button>
                         <a href="{{ route('employees.displayDepartment',$department->id) }}"

@@ -7,6 +7,9 @@
 
 
 <div class="container my-5">
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <div class="d-flex justify-content-center flex-wrap gap-4">
         @foreach($trainers as $trainer) <!-- Adjust the number of cards by changing the loop limit -->
         <div class="card" style="width: 18rem;">
