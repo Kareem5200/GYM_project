@@ -13,6 +13,7 @@ class Membership extends Model
         'start_date',
         'end_date',
         'user_id',
+        'trainer_id',
         'category_id',
         'department_id',
         'created_at',
@@ -21,6 +22,9 @@ class Membership extends Model
 
     public function user(){
         return  $this->belongsTo(User::class,'user_id');
+    }
+    public function trainer(){
+        return  $this->belongsTo(User::class,'trainer_id');
     }
     public function department(){
         return  $this->belongsTo(Department::class,'department_id');

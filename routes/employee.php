@@ -48,6 +48,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
                 Route::get('/displayDepartment/{department}','displayDepartment')->name('displayDepartment');
                 Route::patch('changeStatus/{department}','changeStatus')->name('changeStatus');
+                Route::get('/deactivatedDepartment','deactivatedDepartment')->name('deactivatedDepartment');
             });
 
             Route::controller(App\Http\Controllers\EmployeeControllers\ProfileController::class)->group(function(){
@@ -92,6 +93,8 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::get('trainerProfile/{trainer}','trainerProfile')->name('trainerProfile');
                 Route::view('addQualification/{trainer_id}','employees.admins.trainers.addQualification')->name('addQualification');
                 Route::post('createQualification/{trainer_id}','createQualification')->name('createQualification');
+                Route::get('deactivatedTrainers','deactivatedTrainers')->name('deactivatedTrainers');
+                Route::patch('changeTrainerStatus/{trainer}','changeTrainerStatus')->name('changeTrainerStatus');
 
             });
         });

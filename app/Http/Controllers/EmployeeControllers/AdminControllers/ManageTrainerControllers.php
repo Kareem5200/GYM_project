@@ -8,38 +8,40 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequests\TrainersRequests\CreateRequest;
+use App\Models\NutrationPlan;
 use App\Models\Qualification;
+use App\Models\WorkoutPlan;
 
 class ManageTrainerControllers extends Controller
 {
     public function getTrainerMemberships(Employee $trainer){
-       $users =$trainer->users()->wherePivot('status','active')->get();
-       foreach ($users as $user){
 
-        $membership = $user->memberships()->where('department_id',$trainer->department->id)
-                           ->where('end_date','>=',now())->first();
+        $trainer_memberships = $trainer->memberships()->where('end_date','>=',now())->with(['user:id,name', 'category'])->get();
+        foreach($trainer_memberships as $membership){
 
-        $user->category =  $membership->category->category;
-        $user->plan =  $membership->category->plan;
-        $user->end_date =  $membership->end_date;
 
-        $nutplanExists =  $user->nutrationPlans()->where('trainer_id',$trainer->id)->where('end_date','>=',now())->exists();
-        if($nutplanExists){
-            $user->nutPlanExists ='Done';
-        }else{
-            $user->nutPlanExists ='Not done';
+            $nut_plan_exists = NutrationPlan::where(['trainer_id'=>$trainer->id,'user_id'=>$membership->user->id,])
+                                ->where('end_date','>=',now())->exists();
+            $work_plan_exists = WorkoutPlan::where(['trainer_id'=>$trainer->id,'user_id'=>$membership->user->id,])
+                                ->where('end_date','>=',now())->exists();
+            if($nut_plan_exists){
+                $membership->nut_plan_exists ='Done';
+            }else{
+                $membership->nut_plan_exists ='Not done';
+            }
+
+            if($work_plan_exists){
+                $membership->work_plan_exists ='Done';
+            }else{
+                $membership->work_plan_exists ='Not done';
+            }
+
+
+
+
         }
 
-        $workoutplanExists =  $user->workoutPlans()->where('trainer_id',$trainer->id)->where('end_date','>=',now())->exists();
-        if($workoutplanExists){
-            $user->workoutPlanExists ='Done';
-        }else{
-            $user->workoutPlanExists ='Not done';
-        }
-
-       }
-
-       return view('employees.admins.trainers.displayMemberships',compact('trainer','users'));
+       return view('employees.admins.trainers.displayMemberships',compact('trainer_memberships'));
     }
 
     public function trainerProfile(Employee $trainer){
@@ -64,6 +66,37 @@ class ManageTrainerControllers extends Controller
         Qualification::create($data);
         return to_route('employees.trainerProfile',$trainer_id)->with('success','Qualification added successfully');
 
+
+
+    }
+
+    public function deactivatedTrainers(){
+
+        $trainers = Employee::where(['type'=>'trainer','status'=>'deactive'])->get();
+
+        return view('employees.admins.trainers.deactivatedTariners',compact('trainers'));
+    }
+
+    public function  changeTrainerStatus(Employee $trainer){
+
+        if($trainer->status == 'active'){
+
+            $trainer->update([
+                'status'=>'deactive'
+            ]);
+
+        }else{
+
+            if($trainer->department->status == 'deactive'){
+                return redirect()->back()->with('error','The department of trainer is deactivated');
+            }
+            $trainer->update([
+                'status'=>'active'
+            ]);
+        }
+
+
+        return to_route('employees.displayDepartment',$trainer->department->id);
 
 
     }

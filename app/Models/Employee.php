@@ -33,19 +33,26 @@ class Employee extends Authenticatable
     ];
 
 
-    public function users(){
-        return $this->belongsToMany(User::class,'trainer_user','trainer_id','user_id')->withPivot('status');
+    // public function users(){
+    //     return $this->belongsToMany(User::class,'trainer_user','trainer_id','user_id')->withPivot('status');
+    // }
+
+    public function memberships(){
+        return $this->hasMany(Membership::class,'trainer_id');
     }
 
     public function department(){
         return $this->belongsTo(Department::class,'department_id');
     }
+
     public function qualifications(){
         return $this->hasMany(Qualification::class,'trainer_id');
     }
+
     public function nutrationPlans(){
         return $this->hasMany(NutrationPlan::class,'trainer_id');
     }
+
     public function workoutPlans(){
         return $this->hasMany(WorkoutPlan::class,'trainer_id');
     }

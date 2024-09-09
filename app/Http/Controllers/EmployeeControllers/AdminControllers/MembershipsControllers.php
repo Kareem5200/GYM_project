@@ -18,9 +18,7 @@ class MembershipsControllers extends Controller
     public function MembershipsWithoutTrainers(){
 
         $memberships = Membership::with(['department:id,name', 'user:id,name'])
-        ->whereHas('user', function ($query) {
-            $query->doesntHave('trainers'); // Check that the user doesn't have any trainers
-        })
+        ->where('trainer_id',NULL)
         ->orderBy('end_date')
         ->get();
 

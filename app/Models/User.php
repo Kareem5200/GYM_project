@@ -63,7 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(Membership::class,'user_id');
     }
 
-    public function trainers(){
-        return $this->belongsToMany(Employee::class,'trainer_user','user_id','trainer_id')->withPivot('status');
-    }
+    // public function trainers(){
+    //     return $this->belongsToMany(Employee::class,'trainer_user','user_id','trainer_id')->withPivot('status');
+    // }
 }

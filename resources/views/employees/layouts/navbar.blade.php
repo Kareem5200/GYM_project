@@ -133,6 +133,40 @@
                 </div>
 
             </div>
+
+
+            <div class=" hover:bg-slate-500 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                stroke="currentColor" class="w-4 h-4">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <div>
+
+                <a href="{{ route('employees.deactivatedDepartment') }}"
+                    class="text-decoration-none text-dark fw-bold">Deactivated Departments</a>
+            </div>
+
+
+        </div>
+
+
+
+        <div
+        class=" hover:bg-slate-500 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+            stroke="currentColor" class="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round"
+                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+        </svg>
+        <div>
+
+            <a href="{{ route('employees.deactivatedTrainers') }}"
+                class="text-decoration-none text-dark fw-bold">Deactivated Trainers</a>
+        </div>
+
+    </div>
+
             <div
                 class=" hover:bg-slate-500 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
@@ -269,7 +303,7 @@
 
     function openNav() {
         if (sidebar.classList.contains('-translate-x-48')) {
-            // max sidebar 
+            // max sidebar
             sidebar.classList.remove("-translate-x-48")
             sidebar.classList.add("translate-x-none")
             maxSidebar.classList.remove("hidden")

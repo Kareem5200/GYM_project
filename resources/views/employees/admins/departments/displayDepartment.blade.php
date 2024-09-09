@@ -32,15 +32,21 @@
 
 <div class="container my-5">
     <div class="d-flex justify-content-center flex-wrap gap-4">
-        @foreach($department->trainers as $trainer) <!-- Adjust the number of cards by changing the loop limit -->
+        @foreach($department->trainers()->where('status','active')->get() as $trainer) <!-- Adjust the number of cards by changing the loop limit -->
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('images/employees_images/'.$trainer->image) }}" class="card-img-top" alt="trainer image">
             <div class="card-body">
                 <h5 class="card-title">{{ $trainer->name }}</h5>
-                <p class="card-text">Active Memberships : {{ $trainer->users()->wherePivot('status','active')->count() }}</p>
+                <p class="card-text">Active Memberships : {{ $trainer->memberships()->where('end_date','>=',now())->count() }}</p>
                 <a href="{{ route('employees.trainerProfile',$trainer->id) }}" class="btn btn-primary">Profile</a>
                 <a href="{{ route('employees.getTrainerMemberships',$trainer->id) }}" class="btn btn-primary">Memberships</a>
                 <a href="{{ route('employees.addQualification',$trainer->id) }}" class="btn btn-primary">Add Qualification</a>
+                <form action="{{ route('employees.changeTrainerStatus',$trainer->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+
+                    <button class="btn btn-danger">Make Deactive</button>
+                </form>
             </div>
         </div>
         @endforeach

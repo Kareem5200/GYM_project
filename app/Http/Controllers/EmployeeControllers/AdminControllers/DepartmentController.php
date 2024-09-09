@@ -61,7 +61,7 @@ class DepartmentController extends Controller
     }
 
     public function displayDepartment(Department $department){
-        
+
 
         return view('employees.admins.departments.displayDepartment',compact('department'));
 
@@ -87,6 +87,11 @@ class DepartmentController extends Controller
         }
         return to_route('employees.departments')->with('success','Department updated successfully');
 
+    }
+
+    public function deactivatedDepartment(){
+        $departments = Department::where('status','deactive')->get();
+        return view('employees.admins.departments.deactivatedDeaprtments',compact('departments'));
     }
 
 }

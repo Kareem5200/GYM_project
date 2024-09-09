@@ -8,6 +8,7 @@
         <table class="w-full table-fixed">
             <thead>
                 <tr class="bg-gray-100">
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Membership ID</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">User ID</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">user name</th>
                     <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Category</th>
@@ -21,16 +22,17 @@
             </thead>
             <tbody class="bg-white">
                 <!-- Membership Row -->
-                @forelse ($users as $user )
+                @forelse ($trainer_memberships as $membership )
 
                 <tr>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->id }}</td>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->name }}</td>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->category }}</td>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->plan }}</td>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->end_date }}</td>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->nutPlanExists }}</td>
-                    <td class="py-4 px-6 border-b border-gray-200">{{ $user->workoutPlanExists }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->id }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->user->id }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->user->name }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->category->category }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->category->plan }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->end_date }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->nut_plan_exists }}</td>
+                    <td class="py-4 px-6 border-b border-gray-200">{{ $membership->work_plan_exists }}</td>
 
 
                 </tr>
