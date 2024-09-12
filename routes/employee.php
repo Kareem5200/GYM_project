@@ -41,13 +41,18 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\DepartmentController::class)
             ->group(function(){
+                Route::middleware('checkDepartment')->group(function(){
+                    Route::get('/updateDepartment/{department}','updateDepartment')->name('updateDepartment');
+                    Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
+                    Route::get('/displayDepartment/{department}','displayDepartment')->name('displayDepartment');
+                    Route::get('addEquipmentForDepartment/{department}','addEquipmentForDepartment')->name('addEquipmentForDepartment');
+                    Route::post('createEquipmentForDepartment/{department}','createEquipmentForDepartment')->name('createEquipmentForDepartment');
+                    Route::delete('removeEquipment/{department}/{equipment_id}','removeEquipment')->name('removeEquipment');
+                });
+                Route::patch('changeStatus/{department}','changeStatus')->name('changeStatus');
                 Route::get('/departments','departments')->name('departments');
                 Route::view('/addDepartment','employees.admins.departments.addDepartment')->name('addDepartment');
                 Route::post('/createDepartment','createDepartment')->name('createDepartment');
-                Route::get('/updateDepartment/{department}','updateDepartment')->name('updateDepartment');
-                Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
-                Route::get('/displayDepartment/{department}','displayDepartment')->name('displayDepartment');
-                Route::patch('changeStatus/{department}','changeStatus')->name('changeStatus');
                 Route::get('/deactivatedDepartment','deactivatedDepartment')->name('deactivatedDepartment');
             });
 
@@ -64,7 +69,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::get('addCategory','addCategory')->name('addCategory');
                 Route::post('createCategory','createCategory')->name('createCategory');
                 Route::get('/categoryDepartments/{category}','categoryDepartments')->name('categoryDepartments');
-                Route::put('/changeDepartmentStatus/{category}/{department_id}','changeDepartmentStatus')->name('changeDepartmentStatus');
+                Route::put('/changeDepartmentStatus/{category}/{department_id}','changeDepartmentStatus')->name('changeDepartmentStatus')->middleware('checkDepartment');
                 Route::view('updateCategoryPrice/{category_id}/{department_id}','employees.admins.categories.updateCategoryPrice')->name('updateCategoryPrice');
                 Route::put('/editCategoryPrice/{category_id}/{department_id}','editCategoryPrice')->name('editCategoryPrice');
 
@@ -88,14 +93,24 @@ Route::prefix('/employees')->name('employees.')->group(function(){
             });
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\ManageTrainerControllers::class)->group(function(){
+                Route::middleware('checkTrainer')->group(function(){
+                    Route::get('trainerProfile/{trainer}','trainerProfile')->name('trainerProfile');
+                    Route::view('addQualification/{trainer_id}','employees.admins.trainers.addQualification')->name('addQualification');
+                    Route::post('createQualification/{trainer_id}','createQualification')->name('createQualification');
 
+                });
                 Route::get('getTrainerMemberships/{trainer}','getTrainerMemberships')->name('getTrainerMemberships');
-                Route::get('trainerProfile/{trainer}','trainerProfile')->name('trainerProfile');
-                Route::view('addQualification/{trainer_id}','employees.admins.trainers.addQualification')->name('addQualification');
-                Route::post('createQualification/{trainer_id}','createQualification')->name('createQualification');
                 Route::get('deactivatedTrainers','deactivatedTrainers')->name('deactivatedTrainers');
                 Route::patch('changeTrainerStatus/{trainer}','changeTrainerStatus')->name('changeTrainerStatus');
 
+            });
+
+            Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\EquipmentController::class)->group(function(){
+                Route::get('/getEquipment','getEquipment')->name('getEquipment');
+                Route::view('/updateEquipmentImage/{equipment_id}','employees.admins.departments.equipment.updateEquipmentImage')->name('updateEquipmentImage');
+                Route::patch('/editEquipmentImage/{equipment_id}','editEquipmentImage')->name('editEquipmentImage');
+                Route::view('/addEquipment','employees.admins.departments.equipment.addEquipment')->name('addEquipment');
+                Route::post('createEquipment','createEquipment')->name('createEquipment');
             });
         });
 

@@ -11,6 +11,7 @@ class DepartmentEquipment extends Model
 
     protected $table="department_equipment";
     protected $primaryKey=['department_id','equipment_id'];
+    protected $incrementing = false ;
 
     protected $fillable = [
         'department_id ',

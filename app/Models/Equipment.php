@@ -12,16 +12,16 @@ class Equipment extends Model
 
     protected $fillable = [
         'name',
-        'brand',
-        'price',
+        // 'brand',
+        // 'price',
         'image',
-        'quantity',
-        'buy_date',
-        'status',
+        // 'quantity',
+        // 'buy_date',
+        // 'status',
     ];
 
 
     public function departments(){
-        return $this->belongsToMany(Department::class,'department_equipment','department_id','equipment_id');
+        return $this->belongsToMany(Department::class,'department_equipment','equipment_id','department_id');
     }
 }

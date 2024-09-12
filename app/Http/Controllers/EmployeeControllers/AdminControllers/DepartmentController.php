@@ -14,8 +14,25 @@ use App\Http\Requests\EmployeeRequests\DepartmentRequests\UpdateRequest;
 
 class DepartmentController extends Controller
 {
+
+    public function changeStatusDepartment($department,$status){
+        $department->update([
+            'status'=>$status,
+        ]);
+        $department->trainers()->update([
+            'status'=>$status,
+        ]);
+
+        $categories = $department->categories;
+        foreach ($categories as $category) {
+            $department->categories()->updateExistingPivot($category->id, ['status' => $status]);
+        }
+
+    }
+
+
     public function departments(){
-        $departments = Department::where('status','=','active')->get();
+        $departments = Department::whereStatus('active')->get();
         return view('employees.admins.departments.departments',compact('departments'));
     }
 
@@ -62,36 +79,57 @@ class DepartmentController extends Controller
 
     public function displayDepartment(Department $department){
 
+        $categories = $department->categories()->withPivot('price')->wherePivot('status','active')->get();
+        $trainers = $department->trainers()->whereStatus('active')->get(['id','name','image']);
+        $equipments = $department->equipment()->get(['id','image']);
 
-        return view('employees.admins.departments.displayDepartment',compact('department'));
+        return view('employees.admins.departments.displayDepartment',compact('department','categories','trainers','equipments'));
 
     }
 
     public function changeStatus(Department $department){
         if($department->status == 'active'){
 
-            $department->update([
-                'status'=>'deactive',
-            ]);
-            $department->trainers()->update([
-                'status'=>'deactive',
-            ]);
+            $this->changeStatusDepartment($department,'deactive');
 
         }else{
-            $department->update([
-                'status'=>'active',
-            ]);
-            $department->trainers()->update([
-                'status'=>'active',
-            ]);
+
+            $this->changeStatusDepartment($department,'active');
         }
         return to_route('employees.departments')->with('success','Department updated successfully');
 
     }
 
     public function deactivatedDepartment(){
-        $departments = Department::where('status','deactive')->get();
+        $departments = Department::whereStatus('deactive')->get();
         return view('employees.admins.departments.deactivatedDeaprtments',compact('departments'));
+    }
+
+    public function addEquipmentForDepartment(Department $department){
+        $equipment= Equipment::whereDoesntHave('departments',function($query)use($department){
+            $query->where('department_id',$department->id);
+        })->get();
+
+        $department_id=$department->id;
+        return view('employees.admins.departments.addEquipmentForDepartment',compact('equipment','department_id'));
+
+    }
+    public function createEquipmentForDepartment(Request $request,Department $department){
+        $validated = $request->validate([
+            'equipment_id'=>['required','numeric'],
+        ]);
+
+        $department->equipment()->attach($request->equipment_id);
+        return to_route('employees.displayDepartment',$department->id)->with('success','Equipment added successfullt');
+
+
+    }
+
+    public function removeEquipment(Department $department,$equipment_id){
+
+        $department->detach($equipment_id);
+        return to_route('employees.displayDepartment',$department->id)->with('success','Equipment removed successfully');
+
     }
 
 }

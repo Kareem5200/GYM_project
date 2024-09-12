@@ -22,6 +22,7 @@
                     @method('PATCH')
                     <button class="btn btn-success">Make Active</button>
                 </form>
+                <a href="{{ route('employees.getTrainerMemberships',$trainer->id) }}" class="btn btn-primary">Memberships</a>
 
             </div>
         </div>

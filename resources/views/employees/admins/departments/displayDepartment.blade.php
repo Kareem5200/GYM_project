@@ -4,35 +4,41 @@
 @endsection
 
 @section('content')
+@foreach ($equipments as $equip)
 <div class="container-fluid px-0">
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner w-100">
 
-            @foreach ($department->equipment as $equipment)
             <div class="carousel-item active">
-                <img src="{{ asset('images/departments/equipment/'.$equipment->image) }}" class="d-block w-100" alt="equipment image">
+                <img src="{{ asset('images/departments/equipment/'.$equip->image) }}" class="d-block w-100" alt="equipment image">
+                <form action="{{ route('employees.removeEquipment',['department'=>$department->id,'equipment_id'=>$equip->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-success">Remove From department</button>
+                </form>
             </div>
-            <a href="">View </a>
-            <a href="">Update</a>
-            @endforeach
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
 </div>
-</div>
+@endforeach
+
+<a href="{{ route('employees.addEquipmentForDepartment',$department->id) }}" class="btn btn-success">Add equipment for this department</a>
 
 
 
 <div class="container my-5">
     <div class="d-flex justify-content-center flex-wrap gap-4">
-        @foreach($department->trainers()->where('status','active')->get() as $trainer) <!-- Adjust the number of cards by changing the loop limit -->
+        @foreach($trainers as $trainer) <!-- Adjust the number of cards by changing the loop limit -->
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('images/employees_images/'.$trainer->image) }}" class="card-img-top" alt="trainer image">
             <div class="card-body">
@@ -44,7 +50,6 @@
                 <form action="{{ route('employees.changeTrainerStatus',$trainer->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
-
                     <button class="btn btn-danger">Make Deactive</button>
                 </form>
             </div>
@@ -55,6 +60,33 @@
 
 
 
-{{-- <a href="{{ route('employees.addEquipment',$department->id) }}"> add equipment</a> --}}
+<table class="table table-success table-striped-columns">
+    <thead>
+        <tr>
+
+            <th>Category</th>
+            <th>Plan</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+      <tbody>
+        @forelse ($categories as $category )
+        <tr class="table-active">
+            <td>{{ $category->category }}</td>
+            <td>{{ $category->plan }}</td>
+            <td> {{ $category->pivot->price }} </td>
+        </tr>
+        @empty
+        <tr>
+            <td>Empty</td>
+            <td>Empty</td>
+            <td>Empty</td>
+        </tr>
+
+        @endforelse
+
+
+      </tbody>
+</table>
 @endsection
 

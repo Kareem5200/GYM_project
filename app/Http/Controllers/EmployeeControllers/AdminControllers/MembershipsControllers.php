@@ -18,7 +18,7 @@ class MembershipsControllers extends Controller
     public function MembershipsWithoutTrainers(){
 
         $memberships = Membership::with(['department:id,name', 'user:id,name'])
-        ->where('trainer_id',NULL)
+        ->doesntHave('trainer')
         ->orderBy('end_date')
         ->get();
 
@@ -30,8 +30,8 @@ class MembershipsControllers extends Controller
     public function addMembershipWithoutTrainer(){
 
 
-        $departments = Department::where('status','active')->get(['id','name']);
-        $categories  =Category::where('plan','withoutPlans')->get();
+        $departments = Department::whereStatus('active')->get(['id','name']);
+        $categories  =Category::wherePlan('withoutPlans')->get();
         return  view('employees.admins.memberships.addMembership',compact('departments','categories'));
     }
 
@@ -45,11 +45,9 @@ class MembershipsControllers extends Controller
 
         $category = Category::find($request->category_id);
 
-         $end_date = date('Y-m-d', strtotime( "+".$category->category,strtotime($request->start_date)));
+        $end_date = date('Y-m-d', strtotime( "+".$category->category,strtotime($request->start_date)));
         $data = $request->all();
         $data['end_date'] =$end_date;
-
-
 
         Membership::create($data);
         return to_route('employees.MembershipsWithoutTrainers')->with('success','Membership created successfully');
@@ -59,7 +57,7 @@ class MembershipsControllers extends Controller
 
 
     public function updateMembershipWithoutTrainer($membership_id){
-        $categories  =Category::where('plan','withoutPlans')->get();
+        $categories  =Category::wherePlan('withoutPlans')->get();
         return view('employees.admins.memberships.updateMembership',compact('categories','membership_id'));
     }
     public function editMembershipWithoutTrainer(UpdateRequest $request,Membership $membership){

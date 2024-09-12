@@ -11,6 +11,7 @@ class CategoryDepartment extends Model
 
     protected $table="category_department";
     protected $primaryKey=['category_id','department_id'];
+    protected $incrementing = false ; 
 
 
     protected $fillable = [

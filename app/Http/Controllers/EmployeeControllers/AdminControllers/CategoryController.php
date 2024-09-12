@@ -12,11 +12,11 @@ use App\Http\Requests\EmployeeRequests\CategoryRequests\AddRequest;
 class CategoryController extends Controller
 {
     public function categories(){
-        $categories = Category::get();
+        $categories = Category::all();
         return view('employees.admins.categories.categories',compact('categories'));
     }
     public function addCategory(){
-        $departments = Department::get(['id','name']);
+        $departments = Department::whereStatus('active')->get(['id','name']);
         return view('employees.admins.categories.addCategory',compact('departments'));
     }
     public function createCategory(AddRequest $request){
@@ -41,18 +41,19 @@ class CategoryController extends Controller
         return view('employees.admins.categories.departmentsCategory',compact('category'));
     }
     public function changeDepartmentStatus(Category $category,$department_id){
-        $department_category_exists=$category->departments()->where('department_id',$department_id)->first()->pivot;
+        $department =$category->departments()->where('department_id',$department_id)->first();
+        $department_category_exists=$department->pivot;
 
         if(!empty($department_category_exists)){
 
             if($department_category_exists->status == 'active'){
-                $department_category_exists->status ='deactive';
-                $department_category_exists->save();
+                $category->departments()->updateExistingPivot($department_id,['status'=>'deactive']);
+
                 return to_route('employees.categoryDepartments',$category->id)->with('success','Status changed successfully');
             }
 
-            $department_category_exists->status ='active';
-            $department_category_exists->save();
+            $category->departments()->updateExistingPivot($department_id,['status'=>'active']);
+
             return to_route('employees.categoryDepartments',$category->id)->with('success','Status changed successfully');
 
         }

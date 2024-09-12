@@ -19,7 +19,6 @@ class ManageTrainerControllers extends Controller
         $trainer_memberships = $trainer->memberships()->where('end_date','>=',now())->with(['user:id,name', 'category'])->get();
         foreach($trainer_memberships as $membership){
 
-
             $nut_plan_exists = NutrationPlan::where(['trainer_id'=>$trainer->id,'user_id'=>$membership->user->id,])
                                 ->where('end_date','>=',now())->exists();
             $work_plan_exists = WorkoutPlan::where(['trainer_id'=>$trainer->id,'user_id'=>$membership->user->id,])
