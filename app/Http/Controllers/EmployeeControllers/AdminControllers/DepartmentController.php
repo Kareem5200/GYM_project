@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
+use Exception;
 use App\Models\Equipment;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\DepartmentEquipment;
 use App\Http\Controllers\Controller;
-
 use App\Http\Controllers\EmployeeControllers\AuthController;
 use App\Http\Requests\EmployeeRequests\DepartmentRequests\CreateRequest;
 use App\Http\Requests\EmployeeRequests\DepartmentRequests\UpdateRequest;
@@ -15,7 +17,7 @@ use App\Http\Requests\EmployeeRequests\DepartmentRequests\UpdateRequest;
 class DepartmentController extends Controller
 {
 
-    public function changeStatusDepartment($department,$status){
+    protected function changeStatusDepartment($department,$status){
         $department->update([
             'status'=>$status,
         ]);
@@ -88,14 +90,28 @@ class DepartmentController extends Controller
     }
 
     public function changeStatus(Department $department){
+        DB::beginTransaction();
         if($department->status == 'active'){
 
-            $this->changeStatusDepartment($department,'deactive');
+            try{
+                $this->changeStatusDepartment($department,'deactive');
+                DB::commit();
+            }catch(Exception $exception){
+                DB::rollBack();
+                return redirect()->back()->with('error',$exception->getMessage());
+            }
 
         }else{
 
-            $this->changeStatusDepartment($department,'active');
+            try{
+                $this->changeStatusDepartment($department,'active');
+                DB::commit();
+            }catch(Exception $exception){
+                DB::rollBack();
+                return redirect()->back()->with('error',$exception->getMessage());
+            }
         }
+
         return to_route('employees.departments')->with('success','Department updated successfully');
 
     }

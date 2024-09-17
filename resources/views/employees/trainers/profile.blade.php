@@ -1,7 +1,9 @@
-@extends('employees.layouts.navbar')
+@extends('employees.layouts.trainerNav')
 @section('title')
 <title>Profile</title>
 @endsection
+@section('content')
+
 @section('content')
 
 

@@ -96,6 +96,7 @@ class AuthController extends Controller
 
             }elseif(Auth::guard('employees')->user()->type == 'trainer'){
 
+                return to_route('employees.trainerIndex');
             }
 
         }

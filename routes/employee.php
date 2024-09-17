@@ -118,6 +118,12 @@ Route::prefix('/employees')->name('employees.')->group(function(){
         Route::middleware('isTrainer')->group(function(){
 
             //Trainer Routes
+
+            Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\DashboardController::class)->group(function(){
+                    Route::get('trainerIndex','trainerIndex')->name('trainerIndex');
+                    Route::view('trainerProfile','employees.trainers.profile')->name('trainerProfile');
+                    Route::view('trainerQualifications','employees.trainers.qualifications')->name('trainerQualifications');
+            });
         });
     });
 
