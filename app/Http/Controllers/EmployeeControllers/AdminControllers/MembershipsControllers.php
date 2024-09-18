@@ -37,7 +37,7 @@ class MembershipsControllers extends Controller
 
     public function createMembershipWithoutTrainer(CreateRequest $request){
         $membership_exists = Membership::where(['user_id'=>$request->user_id,'department_id'=>$request->department_id])
-                            ->where('end_date','>=',now())->exists();
+                            ->activeMembership()->exists();
 
         if($membership_exists){
             return redirect()->back()->with('error','This user has active membership');

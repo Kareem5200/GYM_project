@@ -16,13 +16,13 @@ class ManageTrainerControllers extends Controller
 {
     public function getTrainerMemberships(Employee $trainer){
 
-        $trainer_memberships = $trainer->memberships()->where('end_date','>=',now())->with(['user:id,name', 'category'])->get();
+        $trainer_memberships = $trainer->memberships()->activeMembership()->with(['user:id,name', 'category'])->get();
         foreach($trainer_memberships as $membership){
 
             $nut_plan_exists = NutrationPlan::where(['trainer_id'=>$trainer->id,'user_id'=>$membership->user->id,])
-                                ->where('end_date','>=',now())->exists();
+                                            ->activeNutrationPlan()->exists();
             $work_plan_exists = WorkoutPlan::where(['trainer_id'=>$trainer->id,'user_id'=>$membership->user->id,])
-                                ->where('end_date','>=',now())->exists();
+                                            ->activeWorkoutPlan()->exists();
             if($nut_plan_exists){
                 $membership->nut_plan_exists ='Done';
             }else{

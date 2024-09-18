@@ -27,4 +27,8 @@ class NutrationPlan extends Model
     public function trainer(){
         return $this->belongsTo(Employee::class,'trainer_id');
     }
+
+    public function scopeActiveNutrationPlan($query){
+        return $query->where('end_date','>=',now());
+    }
 }

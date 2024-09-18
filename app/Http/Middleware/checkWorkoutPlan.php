@@ -3,12 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class checkWorkoutUser
+class checkWorkoutPlan
 {
     /**
      * Handle an incoming request.
@@ -17,24 +16,11 @@ class checkWorkoutUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if($user_id = $request->route('user_id')){
-
-            $user=User::find($user_id);
-        }else{
-            $user = $request->route('user');
-        }
-
-        if(!$user){
+        $workoutPlan = $request->route('workout_plan');
+        
+        if($workoutPlan->trainer_id != Auth::guard('employees')->id() || $workoutPlan->end_date < now()){
             abort(403);
         }
-
-        $membership_exists = $user->withActiveMemberships()->categoryPlan('workoutPlan')->exists();
-
-        if(!$membership_exists){
-            abort(403);
-        }
-
         return $next($request);
     }
 }

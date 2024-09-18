@@ -127,8 +127,19 @@ Route::prefix('/employees')->name('employees.')->group(function(){
             Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\WorkoutController::class)->group(function(){
                     Route::get('/workUsersWithoutPlans','usersWithoutPlans')->name('workUsersWithoutPlans');
                     Route::get('/workUsersWithPlans','usersWithPlans')->name('workUsersWithPlans');
-                    Route::view('/addWorkoutPlan/{user_id}','employees.trainers.workoutPlan.addPlan')->name('addWorkoutPlan')->middleware('checkWorkoutUser');
                     Route::post('/createWorkoutPlan/{user_id}','CreatePlan')->name('createWorkoutPlan');
+                    Route::delete('/deleteWorkoutPlan/{workout_plan}','deleteWorkoutPlan')->name('deleteWorkoutPlan');
+                    Route::patch('/editWorkoutPlan/{workout_plan}','editWorkoutPlan')->name('editWorkoutPlan');
+
+                    Route::middleware('checkWorkoutPlan')->group(function(){
+                        Route::get('/updateWorkoutPlan/{workout_plan}','updateWorkoutPlan')->name('updateWorkoutPlan');
+                        Route::get('/displayWorkoutPlan/{workout_plan}','displayWorkoutPlan')->name('displayWorkoutPlan');
+
+                    });
+                    Route::middleware('checkWorkoutUser')->group(function(){
+                        Route::view('/addWorkoutPlan/{user_id}','employees.trainers.workoutPlan.addPlan')->name('addWorkoutPlan');
+                        Route::get('/getUserWorkoutPlans/{user_id}','getUserWorkoutPlans')->name('getUserWorkoutPlans');
+                    });
             });
         });
     });

@@ -18,7 +18,7 @@
             <h5 class="card-title">{{ $user->id }}</h5>
             <p class="card-text">{{ $user->name }}</p>
             <a href="{{ route('employees.addWorkoutPlan',$user->id) }}" class="btn btn-primary">Add Plan</a>
-            <a href="" class="btn btn-primary">View Plans</a>
+            <a href="{{ route('employees.getUserWorkoutPlans',$user->id) }}" class="btn btn-primary">View Plans</a>
             </div>
         </div>
     @endforeach

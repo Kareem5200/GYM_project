@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class WorkoutPlan extends Model
 {
@@ -28,5 +29,12 @@ class WorkoutPlan extends Model
     }
     public function trainer(){
         return $this->belongsTo(Employee::class,'trainer_id');
+    }
+
+    public function scopeActiveWorkoutPlan($query){
+        return $query->where('end_date','>=',now());
+    }
+    public function scopeUserWorkoutPlans($query,$user_id){
+        return $query->where(['user_id'=>$user_id,'trainer_id'=>Auth::guard('employees')->id()]);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequests\TrainerRequests\WorkoutPlanRequests\CreateRequest;
+use App\Http\Requests\EmployeeRequests\TrainerRequests\WorkoutPlanRequests\UpdateRequest;
 use App\Models\Membership;
 use App\Models\WorkoutPlan;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,36 @@ class WorkoutController extends Controller
         ]);
 
         WorkoutPlan::create($request->all());
+        return to_route('employees.getUserWorkoutPlans',$user_id)->with('success','Plan addedd successfully');
 
+    }
+
+    public function getUserWorkoutPlans($user_id){
+        $workout_plans = WorkoutPlan::userWorkoutPlans($user_id)->ActiveWorkoutPlan()->get();
+        return view('employees.trainers.workoutPlan.displayPlans',compact('workout_plans'));
+    }
+    public function deleteWorkoutPlan(WorkoutPlan $workout_plan){
+        $workout_plan->delete();
+        return to_route('employees.getUserWorkoutPlans',$workout_plan->user_id)->with('success','Plan deleted successfully');
+    }
+    public function displayWorkoutPlan(WorkoutPlan $workout_plan){
+
+        return view('employees.trainers.workoutPlan.displayPlan',compact('workout_plan'));
+    }
+    public function updateWorkoutPlan(WorkoutPlan $workout_plan){
+        $plan = $workout_plan->plan;
+        $id = $workout_plan->id;
+        return view('employees.trainers.workoutPlan.updatePlan',compact('plan','id'));
+    }
+
+    public function editWorkoutPlan(UpdateRequest $request,WorkoutPlan $workout_plan){
+
+        $data = array_filter($request->all(), function ($value) {
+            return !is_null($value);
+        });
+        
+        $workout_plan->update($data);
+        return to_route('employees.getUserWorkoutPlans',$workout_plan->user_id)->with('success','Plan updated successfully');
     }
 
 
