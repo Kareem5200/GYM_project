@@ -27,9 +27,9 @@ class Employee extends Authenticatable
         'department_id',
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
+    protected $casts = [
+        'password' => 'hashed',
+        // 'email_verified_at' => 'datetime',
     ];
 
 

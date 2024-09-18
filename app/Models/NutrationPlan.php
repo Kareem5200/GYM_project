@@ -17,8 +17,8 @@ class NutrationPlan extends Model
         'supplements',
         'start_date',
         'end_date',
-        'user_id ',
-        'trainer_id ',
+        'user_id',
+        'trainer_id',
     ];
 
     public function user(){

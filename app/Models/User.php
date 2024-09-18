@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use function PHPSTORM_META\map;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
-use function PHPSTORM_META\map;
 
 class User extends Authenticatable
 {
@@ -63,7 +64,39 @@ class User extends Authenticatable
         return $this->hasMany(Membership::class,'user_id');
     }
 
-    // public function trainers(){
-    //     return $this->belongsToMany(Employee::class,'trainer_user','user_id','trainer_id')->withPivot('status');
-    // }
+
+    //Scope the active memberships with auth trainer
+    public function scopeWithActiveMemberships($query)
+    {
+        return $query->whereHas('memberships', function($q) {
+            $q->where('trainer_id', Auth::guard('employees')->id())
+              ->where('end_date', '>=', now());
+        });
+    }
+
+    //Scope the active plans to specific user with auth trainer
+    public function scopeWithActivePlans($query,$plan)
+    {
+        return $query->whereHas($plan, function($q) {
+            $q->where('trainer_id',Auth::guard('employees')->id())
+            ->where('end_date','>=',now());
+        });
+    }
+
+     //Scope to check  plans to specific user with auth trainer
+    public function scopeWithoutActivePlans($query,$plan)
+    {
+        return $query->whereDoesntHave($plan, function($q) {
+            $q->where('trainer_id',Auth::guard('employees')->id())
+            ->where('end_date','>=',now());
+        });
+    }
+
+    //Scope tp check the membership category for specific user
+    public function scopeCategoryPlan($query,$plan)
+    {
+        return $query->whereHas('memberships.category',function($q)use($plan){
+            $q->wherePlan($plan);
+        });
+    }
 }

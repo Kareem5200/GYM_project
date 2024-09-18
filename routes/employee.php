@@ -124,6 +124,12 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                     Route::view('trainerProfile','employees.trainers.profile')->name('trainerProfile');
                     Route::view('trainerQualifications','employees.trainers.qualifications')->name('trainerQualifications');
             });
+            Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\WorkoutController::class)->group(function(){
+                    Route::get('/workUsersWithoutPlans','usersWithoutPlans')->name('workUsersWithoutPlans');
+                    Route::get('/workUsersWithPlans','usersWithPlans')->name('workUsersWithPlans');
+                    Route::view('/addWorkoutPlan/{user_id}','employees.trainers.workoutPlan.addPlan')->name('addWorkoutPlan')->middleware('checkWorkoutUser');
+                    Route::post('/createWorkoutPlan/{user_id}','CreatePlan')->name('createWorkoutPlan');
+            });
         });
     });
 

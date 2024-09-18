@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function trainerIndex(){
+
         $all_nutration_plan_memberships = Membership::where('trainer_id',Auth::guard('employees')->id())->where('end_date','>=',now())
                                         ->whereHas('category',function($query){
                                         $query->where('plan','nutrationPlan');
@@ -29,7 +30,7 @@ class DashboardController extends Controller
                                         $query->where('plan','nutrationPlan');
                                     })
                                     ->count();
-                                    
+
         $users_without_workout_plan = Membership::where('trainer_id',Auth::guard('employees')->id())->where('end_date','>=',now())
                                     ->whereHas('user',function($query){
                                         $query->doesntHave('workoutPlans');

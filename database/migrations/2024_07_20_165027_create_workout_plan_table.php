@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('workout_plan', function (Blueprint $table) {
             $table->id();
-            $table->enum('muscle',['chest','back','biceps','triceps','shoulders','legs','arms','back_biceps','back_triceps','chest_biceps','chest_triceps','chest_back','shoulder_legs','chest_triceps_shoulder','back_,biceps_shoulder']);
+            $table->enum('muscle',['chest','back','biceps','triceps','shoulders','legs','arms','back_biceps','back_triceps','chest_biceps','chest_triceps','chest_back','shoulder_legs','chest_triceps_shoulder','back_biceps_shoulder']);
             $table->enum('days',['day1','day2','day3','day4','day5','day6','day7']);
             $table->text('plan');
             $table->date('start-date');

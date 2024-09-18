@@ -17,8 +17,8 @@ class WorkoutPlan extends Model
         'plan',
         'start_date',
         'end_date',
-        'user_id ',
-        'trainer_id ',
+        'user_id',
+        'trainer_id',
     ];
 
 
