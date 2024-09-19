@@ -36,8 +36,8 @@
                   Nutration Clients
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ route('employees.trainerProfile') }}">Clients have no plans</a></li>
-                  <li><a class="dropdown-item" href="{{ route('employees.trainerQualifications') }}">Clients have plans</a></li>
+                  <li><a class="dropdown-item" href="{{ route('employees.nutrationUsersWithoutPlans') }}">Clients have no plans</a></li>
+                  <li><a class="dropdown-item" href="{{ route('employees.nutrationUsersWithPlans') }}">Clients have plans</a></li>
                 </ul>
               </li>
 

@@ -15,13 +15,13 @@ class WorkoutController extends Controller
 {
     public function usersWithoutPlans(){
 
-        $users = User::withoutActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->get();
+        $users = User::withoutActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->get(['id','name','image','phone1','phone2']);
         return view('employees.trainers.workoutPlan.workClientsWithoutPlans',compact('users'));
     }
 
     public function usersWithPlans(){
 
-        $users = User::withActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->get();
+        $users = User::withActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->get(['id','name','image','phone1','phone2']);
         return view('employees.trainers.workoutPlan.workClientsWithPlans',compact('users'));
 
     }
@@ -65,14 +65,17 @@ class WorkoutController extends Controller
         $workout_plans = WorkoutPlan::userWorkoutPlans($user_id)->ActiveWorkoutPlan()->get();
         return view('employees.trainers.workoutPlan.displayPlans',compact('workout_plans'));
     }
+
     public function deleteWorkoutPlan(WorkoutPlan $workout_plan){
         $workout_plan->delete();
         return to_route('employees.getUserWorkoutPlans',$workout_plan->user_id)->with('success','Plan deleted successfully');
     }
+
     public function displayWorkoutPlan(WorkoutPlan $workout_plan){
 
         return view('employees.trainers.workoutPlan.displayPlan',compact('workout_plan'));
     }
+
     public function updateWorkoutPlan(WorkoutPlan $workout_plan){
         $plan = $workout_plan->plan;
         $id = $workout_plan->id;
@@ -84,7 +87,7 @@ class WorkoutController extends Controller
         $data = array_filter($request->all(), function ($value) {
             return !is_null($value);
         });
-        
+
         $workout_plan->update($data);
         return to_route('employees.getUserWorkoutPlans',$workout_plan->user_id)->with('success','Plan updated successfully');
     }

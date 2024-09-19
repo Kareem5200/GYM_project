@@ -66,37 +66,37 @@ class User extends Authenticatable
 
 
     //Scope the active memberships with auth trainer
-    public function scopeWithActiveMemberships($query)
+    public function scopeWithActiveMemberships($user)
     {
-        return $query->whereHas('memberships', function($q) {
-            $q->where('trainer_id', Auth::guard('employees')->id())
+        return $user->whereHas('memberships', function($query) {
+            $query->where('trainer_id', Auth::guard('employees')->id())
               ->where('end_date', '>=', now());
         });
     }
 
     //Scope the active plans to specific user with auth trainer
-    public function scopeWithActivePlans($query,$plan)
+    public function scopeWithActivePlans($user,$plan)
     {
-        return $query->whereHas($plan, function($q) {
-            $q->where('trainer_id',Auth::guard('employees')->id())
+        return $user->whereHas($plan, function($query) {
+            $query->where('trainer_id',Auth::guard('employees')->id())
             ->where('end_date','>=',now());
         });
     }
 
      //Scope to check  plans to specific user with auth trainer
-    public function scopeWithoutActivePlans($query,$plan)
+    public function scopeWithoutActivePlans($user,$plan)
     {
-        return $query->whereDoesntHave($plan, function($q) {
-            $q->where('trainer_id',Auth::guard('employees')->id())
+        return $user->whereDoesntHave($plan, function($query) {
+            $query->where('trainer_id',Auth::guard('employees')->id())
             ->where('end_date','>=',now());
         });
     }
 
     //Scope tp check the membership category for specific user
-    public function scopeCategoryPlan($query,$plan)
+    public function scopeCategoryPlan($user,$plan)
     {
-        return $query->whereHas('memberships.category',function($q)use($plan){
-            $q->wherePlan($plan);
+        return $user->whereHas('memberships.category',function($query)use($plan){
+            $query->wherePlan($plan);
         });
     }
 }

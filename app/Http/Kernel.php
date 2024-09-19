@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'checkTrainer'=>\App\Http\Middleware\checkTrainer::class,
         'checkWorkoutUser'=>\App\Http\Middleware\checkWorkoutUser::class,
         'checkWorkoutPlan'=>\App\Http\Middleware\checkWorkoutPlan::class,
+        'checkNutrationPlan'=>\App\Http\Middleware\checkNutrationPlan::class,
     ];
 }

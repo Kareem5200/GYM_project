@@ -141,6 +141,19 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                         Route::get('/getUserWorkoutPlans/{user_id}','getUserWorkoutPlans')->name('getUserWorkoutPlans');
                     });
             });
+            Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\NutrationController::class)->group(function(){
+                Route::get('/nutrationUsersWithoutPlans','usersWithoutPlans')->name('nutrationUsersWithoutPlans');
+                Route::get('/nutrationUsersWithPlans','usersWithPlans')->name('nutrationUsersWithPlans');
+
+                Route::middleware('checkNutrationPlan')->group(function(){
+
+                });
+
+
+
+
+            });
+
         });
     });
 
