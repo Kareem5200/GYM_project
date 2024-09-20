@@ -8,8 +8,8 @@ use App\Models\Department;
 use App\Models\Membership;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequests\MembershipRequests\CreateRequest;
-use App\Http\Requests\EmployeeRequests\MembershipRequests\UpdateRequest;
+use App\Http\Requests\AdminRequests\MembershipRequests\CreateRequest;
+use App\Http\Requests\AdminRequests\MembershipRequests\UpdateRequest;
 use Carbon\Carbon;
 
 class MembershipsControllers extends Controller
@@ -36,7 +36,7 @@ class MembershipsControllers extends Controller
     }
 
     public function createMembershipWithoutTrainer(CreateRequest $request){
-      
+
 
         $category = Category::find($request->category_id);
 

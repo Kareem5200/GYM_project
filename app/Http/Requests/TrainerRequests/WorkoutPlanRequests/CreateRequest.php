@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\TrainerRequests\WorkoutPlanRequests;
+namespace App\Http\Requests\TrainerRequests\WorkoutPlanRequests;
 
 use App\Rules\daysCheck;
 use App\Models\Membership;

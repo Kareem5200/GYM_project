@@ -4,7 +4,7 @@ namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
 use App\Helpers\CustomHelperFunctions;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequests\EquipmentRequests\CreateRequest;
+use App\Http\Requests\AdminRequests\EquipmentRequests\CreateRequest;
 use App\Models\Equipment;
 use Illuminate\Http\Request;
 

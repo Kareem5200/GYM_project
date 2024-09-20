@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\TrainerRequests\NutrationPlanRequests;
+namespace App\Http\Requests\TrainerRequests\NutrationPlanRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

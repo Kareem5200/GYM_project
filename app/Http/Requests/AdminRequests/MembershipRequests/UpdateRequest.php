@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests;
+namespace App\Http\Requests\AdminRequests\MembershipRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class LoginRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +22,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=>['required','email'],
-            'password'=>['required','string',Password::min(8)->mixedCase()->numbers()],
+            'category_id'=>['required'],
+            'start_date'=>['required','date','after_or_equal:'.now()->subDays(10),'before_or_equal:'.now()],
         ];
     }
 }

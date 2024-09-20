@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\MembershipRequests;
+namespace App\Http\Requests\AdminRequests\MembershipRequests;
 
 use App\Rules\userExists;
 use App\Models\Membership;

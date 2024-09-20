@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests;
+namespace App\Http\Requests\AdminRequests\CategoryRequests;
 
-use App\Rules\phone2CkechRule;
-use App\Rules\phoneCkechRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateProfileRequest extends FormRequest
+class AddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +22,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone1'=>['required','regex:/^01[0125]{1}[0-9]{8}$/',Rule::unique('employees')->ignore($this->user()),new phoneCkechRule],
-            'phone2'=>['nullable','regex:/^01[0125]{1}[0-9]{8}$/',Rule::unique('employees')->ignore($this->user()),new phone2CkechRule],
+            'category'=>['required'],
+            'department_id'=>['required'],
+            'price'=>['required','numeric','min:0'],
+            'plan'=>['required']
         ];
     }
 }

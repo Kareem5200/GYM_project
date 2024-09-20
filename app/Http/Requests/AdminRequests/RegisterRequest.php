@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests;
+namespace App\Http\Requests\AdminRequests;
 
 use App\Rules\phoneCkechRule;
 use App\Rules\phone2CkechRule;

@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\DepartmentRequests;
+namespace App\Http\Requests\AdminRequests;
 
+use App\Rules\phone2CkechRule;
+use App\Rules\phoneCkechRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +25,8 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string','max:255','unique:departments'],
-            'period'=>['required','string','max:255'],
-            'image'=>['required','image','mimes:png,jpg,jpeg','max:2048'],
+            'phone1'=>['required','regex:/^01[0125]{1}[0-9]{8}$/',Rule::unique('employees')->ignore($this->user()),new phoneCkechRule],
+            'phone2'=>['nullable','regex:/^01[0125]{1}[0-9]{8}$/',Rule::unique('employees')->ignore($this->user()),new phone2CkechRule],
         ];
     }
 }

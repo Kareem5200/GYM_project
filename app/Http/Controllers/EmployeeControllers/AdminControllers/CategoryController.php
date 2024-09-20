@@ -7,7 +7,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\CategoryDepartment;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequests\CategoryRequests\AddRequest;
+use App\Http\Requests\AdminRequests\CategoryRequests\AddRequest;
 
 class CategoryController extends Controller
 {

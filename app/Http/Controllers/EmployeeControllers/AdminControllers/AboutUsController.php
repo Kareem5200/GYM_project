@@ -6,7 +6,7 @@ use App\Models\Aboutus;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequests\AboutUsRequest;
+use App\Http\Requests\AdminRequests\AboutUsRequest;
 
 class AboutUsController extends Controller
 {

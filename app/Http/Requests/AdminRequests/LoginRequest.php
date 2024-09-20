@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\CategoryRequests;
+namespace App\Http\Requests\AdminRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
-class AddRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +23,8 @@ class AddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category'=>['required'],
-            'department_id'=>['required'],
-            'price'=>['required','numeric','min:0'],
-            'plan'=>['required']
+            'email'=>['required','email'],
+            'password'=>['required','string',Password::min(8)->mixedCase()->numbers()],
         ];
     }
 }

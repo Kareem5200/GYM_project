@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\TrainersRequests;
+namespace App\Http\Requests\TrainersRequests;
 
 use App\Models\Qualification;
 use Illuminate\Foundation\Http\FormRequest;

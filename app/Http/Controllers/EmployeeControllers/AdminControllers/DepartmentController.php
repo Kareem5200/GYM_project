@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\DepartmentEquipment;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmployeeControllers\AuthController;
-use App\Http\Requests\EmployeeRequests\DepartmentRequests\CreateRequest;
-use App\Http\Requests\EmployeeRequests\DepartmentRequests\UpdateRequest;
+use App\Http\Requests\AdminRequests\DepartmentRequests\CreateRequest;
+use App\Http\Requests\AdminRequests\DepartmentRequests\UpdateRequest;
 
 class DepartmentController extends Controller
 {

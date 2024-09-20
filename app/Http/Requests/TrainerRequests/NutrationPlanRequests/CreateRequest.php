@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\TrainerRequests\NutrationPlanRequests;
+namespace App\Http\Requests\TrainerRequests\NutrationPlanRequests;
 
 use App\Rules\daysCheck;
 use App\Rules\mealCheck;
@@ -37,7 +37,7 @@ class CreateRequest extends FormRequest
 
 
     public function withValidator($validator){
-        
+
         $validator->after(function($validator){
 
             //To cannot add the exists meal except snacks

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests;
+namespace App\Http\Requests\AdminRequests\EquipmentRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class UpdatePasswordRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,8 @@ class UpdatePasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'old_password'=>['required','string'],
-            'password'=>['required','confirmed','string',Password::min(8)->mixedCase()->numbers()],
-
+            'name'=>['required','string','unique:equipment','max:255'],
+            'image'=>['required','image','mimes:png,jpg,jpeg','max:2048'],
         ];
     }
 }

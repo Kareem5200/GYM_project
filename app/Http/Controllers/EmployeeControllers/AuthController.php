@@ -8,8 +8,8 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\EmployeeRequests\LoginRequest;
-use App\Http\Requests\EmployeeRequests\RegisterRequest;
+use App\Http\Requests\AdminRequests\LoginRequest;
+use App\Http\Requests\AdminRequests\RegisterRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 

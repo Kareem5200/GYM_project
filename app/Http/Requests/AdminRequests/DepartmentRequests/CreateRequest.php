@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\EquipmentRequests;
+namespace App\Http\Requests\AdminRequests\DepartmentRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +22,8 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string','unique:equipment','max:255'],
+            'name'=>['required','string','max:255','unique:departments'],
+            'period'=>['required','string','max:255'],
             'image'=>['required','image','mimes:png,jpg,jpeg','max:2048'],
         ];
     }

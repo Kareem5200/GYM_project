@@ -4,9 +4,9 @@ namespace App\Http\Controllers\EmployeeControllers;
 
 use App\Models\Employee;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequests\UpdatePasswordRequest;
+use App\Http\Requests\AdminRequests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\EmployeeRequests\UpdateProfileRequest;
+use App\Http\Requests\AdminRequests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller

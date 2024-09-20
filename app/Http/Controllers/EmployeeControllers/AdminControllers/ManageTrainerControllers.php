@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequests\TrainersRequests\CreateRequest;
+use App\Http\Requests\TrainersRequests\CreateRequest;
 use App\Models\NutrationPlan;
 use App\Models\Qualification;
 use App\Models\WorkoutPlan;
