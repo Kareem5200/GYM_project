@@ -16,16 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/employees')->name('employees.')->group(function(){
 
     Route::middleware(['guest:employees','guest'])->group(function(){
-
-        Route::get('/registerForm', [App\Http\Controllers\EmployeeControllers\AuthController::class,'registerForm'])->name('registerForm');
         Route::view('/loginForm', 'employees.Auth.login')->name('LoginForm');
-    });
 
-    Route::controller(App\Http\Controllers\EmployeeControllers\AuthController::class)->middleware(['guest:employees','guest'])->group(function(){
+        Route::controller(App\Http\Controllers\EmployeeControllers\AuthController::class)->group(function(){
+            Route::get('/registerForm','registerForm')->name('registerForm');
+            Route::post('/register','register')->name('register');
+            Route::post('/login','login')->middleware('throttle:5,5')->name('login');
 
-        Route::post('/register','register')->name('register');
-        Route::post('/login','login')->middleware('throttle:5,5')->name('login');
-
+        });;
     });
 
     Route::middleware('auth:employees')->group(function(){
@@ -34,13 +32,12 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
               //Admins Routes
 
-            Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\DashboardController::class)
-            ->group(function(){
+            Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\DashboardController::class)->group(function(){
                 Route::get('/index','index')->name('index');
             });
 
-            Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\DepartmentController::class)
-            ->group(function(){
+
+            Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\DepartmentController::class)->group(function(){
                 Route::middleware('checkDepartment')->group(function(){
                     Route::get('/updateDepartment/{department}','updateDepartment')->name('updateDepartment');
                     Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
@@ -56,7 +53,8 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::get('/deactivatedDepartment','deactivatedDepartment')->name('deactivatedDepartment');
             });
 
-            Route::controller(App\Http\Controllers\EmployeeControllers\ProfileController::class)->group(function(){
+
+            Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\ProfileController::class)->group(function(){
                 Route::view('/profile','employees.profile')->name('profile');
                 Route::view('/updateProfile','employees.updateProfile')->name('updateProfile');
                 Route::patch('/editProfile','editProfile')->name('editProfile');

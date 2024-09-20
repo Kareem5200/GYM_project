@@ -17,14 +17,14 @@ class AuthController extends Controller
 {
 
     //Function to store image in specific path
-     static public function storeImage(object $input,string $path):string{
+    //  static public function storeImage(object $input,string $path):string{
 
-        $extension = $input->getClientOriginalExtension();
-        $image_name = time().'.'.$extension;
-        $path = public_path().$path;
-        $input->move($path,$image_name);
-        return  $image_name;
-    }
+    //     $extension = $input->getClientOriginalExtension();
+    //     $image_name = time().'.'.$extension;
+    //     $path = public_path().$path;
+    //     $input->move($path,$image_name);
+    //     return  $image_name;
+    // }
 
     //return register view
     public function registerForm(){

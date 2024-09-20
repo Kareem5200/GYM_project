@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\EmployeeControllers;
+namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
 use App\Models\Employee;
 use App\Http\Controllers\Controller;
