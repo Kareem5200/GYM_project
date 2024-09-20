@@ -144,9 +144,17 @@ Route::prefix('/employees')->name('employees.')->group(function(){
             Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\NutrationController::class)->group(function(){
                 Route::get('/nutrationUsersWithoutPlans','usersWithoutPlans')->name('nutrationUsersWithoutPlans');
                 Route::get('/nutrationUsersWithPlans','usersWithPlans')->name('nutrationUsersWithPlans');
+                Route::post('/createNutrationPlan/{user_id}','createNutrationPlan')->name('createNutrationPlan');
+
+                Route::delete('/deleteNutrationPlan/{nutration_plan}','deleteNutrationPlan')->name('deleteNutrationPlan');
+                Route::get('/updateNutrationPlan/{nutration_plan}','updateNutrationPlan')->name('updateNutrationPlan');
+                Route::patch('/editNutrationPlan/{nutration_plan}','editNutrationPlan')->name('editNutrationPlan');
 
                 Route::middleware('checkNutrationPlan')->group(function(){
-
+                    Route::view('/addNutrationPlan/{user_id}','employees.trainers.nutrationPlan.addPlan')->name('addNutrationPlan');
+                    Route::get('/displayNutrationPlans/{user_id}','displayNutrationPlans')->name('displayNutrationPlans');
+                    Route::get('/displayDayPlans/{day}/{user_id}','displayDayPlans')->name('displayDayPlans');
+                    Route::delete('/deleteDayPlans/{day}/{user_id}','deleteDayPlans')->name('deleteDayPlans');
                 });
 
 

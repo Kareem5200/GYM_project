@@ -16,7 +16,7 @@ class IsTrainer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::guard('employees')->user()->type != 'trainer' ){
+        if(Auth::guard('employees')->user()->type != 'trainer'){
 
             abort(403);
         }

@@ -33,7 +33,14 @@ class Membership extends Model
         return  $this->belongsTo(Category::class,'category_id');
     }
 
-    public function scopeActiveMembership($query){
-        return $query->where('end_date','>=',now());
+    public function scopeActiveMembership($membership){
+        return $membership->where('end_date','>=',now());
+    }
+    public function scopeCategory($membership,$plan){
+        return $membership->whereHas('category',function($category)use($plan){
+            $category->wherePlan($plan);
+
+        });
+
     }
 }

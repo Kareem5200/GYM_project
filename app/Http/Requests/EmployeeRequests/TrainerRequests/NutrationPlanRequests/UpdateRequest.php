@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\EmployeeRequests\TrainerRequests\WorkoutPlanRequests;
+namespace App\Http\Requests\EmployeeRequests\TrainerRequests\NutrationPlanRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'plan'=>['required','string'],
+            'supplements'=>['nullable','string','max:255'],
             'start_date'=>['nullable','date','after_or_equal:'.now(),'before_or_equal:'.now()->addDays(10)],
             'end_date'=>['nullable','date','after:start_date'],
         ];
@@ -32,8 +33,8 @@ class UpdateRequest extends FormRequest
     {
         $validator->after(function ($validator) {
 
-            $nutration_plan = $this->route('nutrationPlan');
-            if ($this->end_date && $this->end_date <= $nutration_plan->start_date) {
+            $workout_plan = $this->route('workout_plan');
+            if ($this->end_date && $this->end_date <= $workout_plan->start_date) {
                 $validator->errors()->add('end_date', 'The new end date is before or equal to the old start date');
             }
         });

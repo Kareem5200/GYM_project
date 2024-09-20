@@ -1,12 +1,9 @@
 @extends('employees.layouts.trainerNav')
 
 @section('title')
-
+<title>{{ $workout_plan->muscle }}</title>
 @endsection
 
-@section('css')
-
-@endsection
 
 @section('content')
 <p class="lead">

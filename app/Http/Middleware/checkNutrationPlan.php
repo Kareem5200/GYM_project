@@ -28,13 +28,14 @@ class checkNutrationPlan
             abort(403);
         }
 
-        $plan_with_same_trainer = NutrationPlan::activeNutrationPlan()->where('user_id',$user->id)
-                                    ->where('trainer_id',Auth::guard('employees')->id())->exists();
+        //To check id user not have plan with anither trainer
+        $plan_with_another_trainer = NutrationPlan::activeNutrationPlan()->where('user_id',$user->id)
+                                    ->where('trainer_id','!=',Auth::guard('employees')->id())->exists();
 
-        $membership_exists = $user->withActiveMemberships()->categoryPlan('nutrationPlan')
-                            ->where('trainer_id',Auth::guard('employees')->id())->exists();
+        //To check if user has active membership with nutartion category
+        $membership_exists = $user->withActiveMemberships()->categoryPlan('nutrationPlan')->exists();
 
-        if(!$plan_with_same_trainer || !$membership_exists ){
+        if($plan_with_another_trainer || !$membership_exists ){
             abort(403);
         }
         return $next($request);

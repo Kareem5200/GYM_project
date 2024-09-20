@@ -27,32 +27,28 @@ class WorkoutController extends Controller
     }
 
     public function CreatePlan(CreateRequest $request,$user_id){
-        $trainer_id = Auth::guard('employees')->id();
-        $plan_Exists = WorkoutPlan::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id,'days'=>$request->days])
-                        ->where('end_date','>=',now())->exists();
+        // $trainer_id = Auth::guard('employees')->id();
 
-        $membership = Membership::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id])->where('end_date','>=',now())
-                          ->whereHas('category',function($query){
-                            $query->wherePlan('workoutPlan');
-                        })->first();
+        // //Check if plan exists
+        // $plan_Exists = WorkoutPlan::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id,'days'=>$request->days])
+        //                 ->where('end_date','>=',now())->exists();
 
-        $User_plans_exists = WorkoutPlan::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id])->where('end_date','>=',now())->exists();
-
-        if($plan_Exists){
-            return redirect()->back()->with('error','The user has plan at this day');
-        }
+        // //To check the end date of plan not after the date of membership
+        // $membership = Membership::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id])->activeMembership()
+        //                   ->category('workoutPlan')->first();
 
 
-        if($request->end_date > $membership->end_date){
-            return redirect()->back()->with('error','End date is after user membership end date');
-        }
+        // if($plan_Exists){
+        //     return redirect()->back()->with('error','The user has plan at this day');
+        // }
 
-        if($User_plans_exists && Auth::guard('employees')->user()->status == 'deactive'){
-            return redirect()->back()->with('error','Cannot add plan for this user becuase you are deactivated');
-        }
+
+        // if($request->end_date > $membership->end_date){
+        //     return redirect()->back()->with('error','End date is after user membership end date');
+        // }
 
         $request->merge([
-            'trainer_id'=> $trainer_id,
+            'trainer_id'=>auth()->guard('employees')->id(),
             'user_id'=>$user_id,
         ]);
 
@@ -84,9 +80,11 @@ class WorkoutController extends Controller
 
     public function editWorkoutPlan(UpdateRequest $request,WorkoutPlan $workout_plan){
 
+
         $data = array_filter($request->all(), function ($value) {
             return !is_null($value);
         });
+
 
         $workout_plan->update($data);
         return to_route('employees.getUserWorkoutPlans',$workout_plan->user_id)->with('success','Plan updated successfully');

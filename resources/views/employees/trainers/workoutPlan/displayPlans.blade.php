@@ -1,12 +1,10 @@
 @extends('employees.layouts.trainerNav')
 
 @section('title')
-
+<title>All plans</title>
 @endsection
 
-@section('css')
 
-@endsection
 
 @section('content')
     @session('success')

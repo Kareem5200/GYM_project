@@ -1,12 +1,9 @@
 @extends('employees.layouts.trainerNav')
 
 @section('title')
-
+<title>Clients without plans</title>
 @endsection
 
-@section('css')
-
-@endsection
 
 @section('content')
 
