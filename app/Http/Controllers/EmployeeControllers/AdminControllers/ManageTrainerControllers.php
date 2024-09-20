@@ -50,14 +50,6 @@ class ManageTrainerControllers extends Controller
 
     public function createQualification(CreateRequest $request,$trainer_id){
 
-
-        $qualification_exists = Qualification::where(['trainer_id'=>$trainer_id,'certification'=>$request->certification])->exists();
-
-       if($qualification_exists){
-
-            return redirect()->back()->with('error','Qualification exists');
-       }
-
         $image_name = CustomHelperFunctions::storeImage($request->image,'\images\qualifications/');
         $data = $request->all();
         $data['image'] =  $image_name;

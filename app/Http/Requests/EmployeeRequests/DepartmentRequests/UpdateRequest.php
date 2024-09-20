@@ -26,4 +26,17 @@ class UpdateRequest extends FormRequest
             'image'=>['nullable','image','mimes:png,jpg,jpeg','max:2048'],
         ];
     }
+
+    public function withValidator($validator){
+        $validator->after(function($validator){
+
+            $department = $this->route('department');
+
+            if($this->period == $department->period && empty($this->image)){
+
+                return $validator->errors()->add('period','The department has no change');
+
+            }
+        });
+    }
 }

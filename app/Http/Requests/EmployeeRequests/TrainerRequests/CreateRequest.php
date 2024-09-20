@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\EmployeeRequests\TrainersRequests;
 
+use App\Models\Qualification;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateRequest extends FormRequest
@@ -26,5 +27,19 @@ class CreateRequest extends FormRequest
             'certification_date'=>['required','date','before_or_equal:'.now()],
             'image'=>['required','image','mimes:png,jpg,jpeg','max:2048'],
         ];
+    }
+
+    public function withValidator($validator){
+
+        $validator->after(function($validator){
+            $trainer_id = $this->route('trainer_id');
+            $qualification_exists = Qualification::where(['trainer_id'=>$trainer_id,'certification'=>$this->certification])->exists();
+
+            if($qualification_exists){
+
+                 return $validator->errors()->add('certification','The certification exists');
+            }
+        });
+
     }
 }

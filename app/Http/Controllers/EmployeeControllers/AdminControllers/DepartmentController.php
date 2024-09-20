@@ -55,16 +55,13 @@ class DepartmentController extends Controller
 
     public function editDepartment(UpdateRequest $request,Department $department){
 
-        if($request->period == $department->period && empty($request->image)){
-
-            return redirect()->back()->with('error','Has no changes');
-
-        }elseif($request->period != $department->period && empty($request->image)){
+        if($request->period != $department->period && empty($this->image)){
 
             $department->update($request->all());
             return to_route('employees.departments')->with('success','Department updated successfully');
 
-        }elseif($request->period == $department->period && !empty($request->image)){
+        }
+        elseif($request->period == $department->period && !empty($request->image)){
 
             $data = $request->except('period');
             $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
