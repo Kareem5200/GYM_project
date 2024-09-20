@@ -36,7 +36,6 @@ class CreateRequest extends FormRequest
 
     public function withValidator($validator){
         $validator->after(function($validator){
-            
             $trainer_id = auth()->guard('employees')->id();
             $user_id=$this->route('user_id');
 
@@ -48,10 +47,12 @@ class CreateRequest extends FormRequest
             $membership = Membership::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id])->activeMembership()
                               ->category('workoutPlan')->first();
 
+
             if($plan_Exists){
                 return $validator->errors()->add('days','The user has plan at this day');
 
             }
+
 
             if($this->end_date > $membership->end_date){
                 return $validator->errors()->add('end_date','End date is after user membership end date');
