@@ -44,9 +44,10 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $trainer->name }}</h5>
                 <p class="card-text">Active Memberships : {{ $trainer->memberships()->where('end_date','>=',now())->count() }}</p>
-                <a href="{{ route('employees.trainerProfile',$trainer->id) }}" class="btn btn-primary">Profile</a>
+                <a href="{{ route('employees.trainerProfileAdmin',$trainer->id) }}" class="btn btn-primary">Profile</a>
                 <a href="{{ route('employees.getTrainerMemberships',$trainer->id) }}" class="btn btn-primary">Memberships</a>
                 <a href="{{ route('employees.addQualification',$trainer->id) }}" class="btn btn-primary">Add Qualification</a>
+                <a href="{{ route('employees.getTrainerTranformations',$trainer->id) }}" class="btn btn-primary">Trainsformations</a>
                 <form action="{{ route('employees.changeTrainerStatus',$trainer->id) }}" method="POST">
                     @csrf
                     @method('PATCH')

@@ -30,7 +30,7 @@ class MembershipsControllers extends Controller
     public function addMembershipWithoutTrainer(){
 
 
-        $departments = Department::whereStatus('active')->get(['id','name']);
+        $departments = Department::active()->get(['id','name']);
         $categories  =Category::wherePlan('withoutPlans')->get();
         return  view('employees.admins.memberships.addMembership',compact('departments','categories'));
     }

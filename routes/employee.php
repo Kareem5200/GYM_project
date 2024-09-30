@@ -42,11 +42,11 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                     Route::get('/updateDepartment/{department}','updateDepartment')->name('updateDepartment');
                     Route::patch('/editDepartment/{department}','editDepartment')->name('editDepartment');
                     Route::get('/displayDepartment/{department}','displayDepartment')->name('displayDepartment');
-                    Route::get('addEquipmentForDepartment/{department}','addEquipmentForDepartment')->name('addEquipmentForDepartment');
-                    Route::post('createEquipmentForDepartment/{department}','createEquipmentForDepartment')->name('createEquipmentForDepartment');
-                    Route::delete('removeEquipment/{department}/{equipment_id}','removeEquipment')->name('removeEquipment');
+                    Route::get('/addEquipmentForDepartment/{department}','addEquipmentForDepartment')->name('addEquipmentForDepartment');
+                    Route::post('/createEquipmentForDepartment/{department}','createEquipmentForDepartment')->name('createEquipmentForDepartment');
+                    Route::delete('/removeEquipment/{department}/{equipment_id}','removeEquipment')->name('removeEquipment');
                 });
-                Route::patch('changeStatus/{department}','changeStatus')->name('changeStatus');
+                Route::patch('/changeStatus/{department}','changeStatus')->name('changeStatus');
                 Route::get('/departments','departments')->name('departments');
                 Route::view('/addDepartment','employees.admins.departments.addDepartment')->name('addDepartment');
                 Route::post('/createDepartment','createDepartment')->name('createDepartment');
@@ -64,11 +64,11 @@ Route::prefix('/employees')->name('employees.')->group(function(){
             });
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\CategoryController::class)->group(function(){
                 Route::get('/categories','categories')->name('categories');
-                Route::get('addCategory','addCategory')->name('addCategory');
-                Route::post('createCategory','createCategory')->name('createCategory');
+                Route::get('/addCategory','addCategory')->name('addCategory');
+                Route::post('/createCategory','createCategory')->name('createCategory');
                 Route::get('/categoryDepartments/{category}','categoryDepartments')->name('categoryDepartments');
                 Route::put('/changeDepartmentStatus/{category}/{department_id}','changeDepartmentStatus')->name('changeDepartmentStatus')->middleware('checkDepartment');
-                Route::view('updateCategoryPrice/{category_id}/{department_id}','employees.admins.categories.updateCategoryPrice')->name('updateCategoryPrice');
+                Route::view('/updateCategoryPrice/{category_id}/{department_id}','employees.admins.categories.updateCategoryPrice')->name('updateCategoryPrice');
                 Route::put('/editCategoryPrice/{category_id}/{department_id}','editCategoryPrice')->name('editCategoryPrice');
 
             });
@@ -92,14 +92,14 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\ManageTrainerControllers::class)->group(function(){
                 Route::middleware('checkTrainer')->group(function(){
-                    Route::get('trainerProfile/{trainer}','trainerProfile')->name('trainerProfile');
-                    Route::view('addQualification/{trainer_id}','employees.admins.trainers.addQualification')->name('addQualification');
-                    Route::post('createQualification/{trainer_id}','createQualification')->name('createQualification');
+                    Route::get('/trainerProfileAdmin/{trainer}','trainerProfile')->name('trainerProfileAdmin');
+                    Route::view('/addQualification/{trainer_id}','employees.admins.trainers.addQualification')->name('addQualification');
+                    Route::post('/createQualification/{trainer_id}','createQualification')->name('createQualification');
 
                 });
-                Route::get('getTrainerMemberships/{trainer}','getTrainerMemberships')->name('getTrainerMemberships');
-                Route::get('deactivatedTrainers','deactivatedTrainers')->name('deactivatedTrainers');
-                Route::patch('changeTrainerStatus/{trainer}','changeTrainerStatus')->name('changeTrainerStatus');
+                Route::get('/getTrainerMemberships/{trainer}','getTrainerMemberships')->name('getTrainerMemberships');
+                Route::get('/deactivatedTrainers','deactivatedTrainers')->name('deactivatedTrainers');
+                Route::patch('/changeTrainerStatus/{trainer}','changeTrainerStatus')->name('changeTrainerStatus');
 
             });
 
@@ -108,7 +108,17 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                 Route::view('/updateEquipmentImage/{equipment_id}','employees.admins.departments.equipment.updateEquipmentImage')->name('updateEquipmentImage');
                 Route::patch('/editEquipmentImage/{equipment_id}','editEquipmentImage')->name('editEquipmentImage');
                 Route::view('/addEquipment','employees.admins.departments.equipment.addEquipment')->name('addEquipment');
-                Route::post('createEquipment','createEquipment')->name('createEquipment');
+                Route::post('/createEquipment','createEquipment')->name('createEquipment');
+            });
+
+            Route::controller(\App\Http\Controllers\EmployeeControllers\AdminControllers\TransformationController::class)->group(function(){
+                Route::middleware('checkTrainer')->group(function(){
+
+                    Route::get('/getTrainerTranformations/{trainer_id}','getTrainerTranformations')->name('getTrainerTranformations');
+                    Route::view('/addTrainerTranformation/{trainer_id}','employees.admins.trainers.addTransformation')->name('addTrainerTranformation');
+                    Route::post('/createTrainerTranformation/{trainer_id}','createTransformation')->name('createTrainerTranformation');
+
+                });
             });
         });
 
@@ -118,26 +128,26 @@ Route::prefix('/employees')->name('employees.')->group(function(){
             //Trainer Routes
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\DashboardController::class)->group(function(){
-                    Route::get('trainerIndex','trainerIndex')->name('trainerIndex');
-                    Route::view('trainerProfile','employees.trainers.profile')->name('trainerProfile');
-                    Route::view('trainerQualifications','employees.trainers.qualifications')->name('trainerQualifications');
+                Route::get('/trainerIndex','trainerIndex')->name('trainerIndex');
+                Route::view('/trainerProfile','employees.trainers.profile')->name('trainerProfile');
+                Route::view('/trainerQualifications','employees.trainers.qualifications')->name('trainerQualifications');
             });
             Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\WorkoutController::class)->group(function(){
-                    Route::get('/workUsersWithoutPlans','usersWithoutPlans')->name('workUsersWithoutPlans');
-                    Route::get('/workUsersWithPlans','usersWithPlans')->name('workUsersWithPlans');
-                    Route::post('/createWorkoutPlan/{user_id}','CreatePlan')->name('createWorkoutPlan');
-                    Route::delete('/deleteWorkoutPlan/{workout_plan}','deleteWorkoutPlan')->name('deleteWorkoutPlan');
-                    Route::patch('/editWorkoutPlan/{workout_plan}','editWorkoutPlan')->name('editWorkoutPlan');
+                Route::get('/workUsersWithoutPlans','usersWithoutPlans')->name('workUsersWithoutPlans');
+                Route::get('/workUsersWithPlans','usersWithPlans')->name('workUsersWithPlans');
+                Route::post('/createWorkoutPlan/{user_id}','CreatePlan')->name('createWorkoutPlan');
+                Route::delete('/deleteWorkoutPlan/{workout_plan}','deleteWorkoutPlan')->name('deleteWorkoutPlan');
+                Route::patch('/editWorkoutPlan/{workout_plan}','editWorkoutPlan')->name('editWorkoutPlan');
 
-                    Route::middleware('checkWorkoutPlan')->group(function(){
-                        Route::get('/updateWorkoutPlan/{workout_plan}','updateWorkoutPlan')->name('updateWorkoutPlan');
-                        Route::get('/displayWorkoutPlan/{workout_plan}','displayWorkoutPlan')->name('displayWorkoutPlan');
+                Route::middleware('checkWorkoutPlan')->group(function(){
+                    Route::get('/updateWorkoutPlan/{workout_plan}','updateWorkoutPlan')->name('updateWorkoutPlan');
+                    Route::get('/displayWorkoutPlan/{workout_plan}','displayWorkoutPlan')->name('displayWorkoutPlan');
 
-                    });
-                    Route::middleware('checkWorkoutUser')->group(function(){
-                        Route::view('/addWorkoutPlan/{user_id}','employees.trainers.workoutPlan.addPlan')->name('addWorkoutPlan');
-                        Route::get('/getUserWorkoutPlans/{user_id}','getUserWorkoutPlans')->name('getUserWorkoutPlans');
-                    });
+                });
+                Route::middleware('checkWorkoutUser')->group(function(){
+                    Route::view('/addWorkoutPlan/{user_id}','employees.trainers.workoutPlan.addPlan')->name('addWorkoutPlan');
+                    Route::get('/getUserWorkoutPlans/{user_id}','getUserWorkoutPlans')->name('getUserWorkoutPlans');
+                });
             });
             Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\NutrationController::class)->group(function(){
                 Route::get('/nutrationUsersWithoutPlans','usersWithoutPlans')->name('nutrationUsersWithoutPlans');
@@ -154,11 +164,8 @@ Route::prefix('/employees')->name('employees.')->group(function(){
                     Route::get('/displayDayPlans/{day}/{user_id}','displayDayPlans')->name('displayDayPlans');
                     Route::delete('/deleteDayPlans/{day}/{user_id}','deleteDayPlans')->name('deleteDayPlans');
                 });
-
-
-
-
             });
+            Route::view('/transformations','employees.trainers.transformations')->name('transformations');
 
         });
     });

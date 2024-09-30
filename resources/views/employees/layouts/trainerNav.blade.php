@@ -49,6 +49,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{{ route('employees.trainerProfile') }}">Profile</a></li>
                   <li><a class="dropdown-item" href="{{ route('employees.trainerQualifications') }}">Qualifications</a></li>
+                  <li><a class="dropdown-item" href="{{ route('employees.transformations') }}">Transformations</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li>
                     <form action="{{ route('logout') }}" method="POST">

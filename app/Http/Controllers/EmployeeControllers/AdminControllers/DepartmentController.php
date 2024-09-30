@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
+use App\Helpers\CustomHelperFunctions;
 use Exception;
 use App\Models\Equipment;
 use App\Models\Department;
@@ -34,14 +35,14 @@ class DepartmentController extends Controller
 
 
     public function departments(){
-        $departments = Department::whereStatus('active')->get();
+        $departments = Department::active()->get();
         return view('employees.admins.departments.departments',compact('departments'));
     }
 
     public function createDepartment(CreateRequest $request){
 
         $data = $request->all();
-        $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
+        $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\departments/');
         Department::create($data);
         return to_route('employees.departments')->with('success','Department added successfully');
 
@@ -64,13 +65,13 @@ class DepartmentController extends Controller
         elseif($request->period == $department->period && !empty($request->image)){
 
             $data = $request->except('period');
-            $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
+            $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\departments/');
             $department->update($data);
             return to_route('employees.departments')->with('success','Department updated successfully');
         }
 
         $data = $request->all();
-        $data['image'] = AuthController::storeImage($request->image,'\images\departments/');
+        $data['image'] = CustomHelperFunctions::storeImage($request->image,'\images\departments/');
         $department->update($data);
         return to_route('employees.departments')->with('success','Department updated successfully');
 
@@ -79,7 +80,7 @@ class DepartmentController extends Controller
     public function displayDepartment(Department $department){
 
         $categories = $department->categories()->withPivot('price')->wherePivot('status','active')->get();
-        $trainers = $department->trainers()->whereStatus('active')->get(['id','name','image']);
+        $trainers = $department->trainers()->active()->get(['id','name','image']);
         $equipments = $department->equipment()->get(['id','image']);
 
         return view('employees.admins.departments.displayDepartment',compact('department','categories','trainers','equipments'));

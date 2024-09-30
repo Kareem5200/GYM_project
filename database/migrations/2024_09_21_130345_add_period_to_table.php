@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('memberships', function (Blueprint $table) {
-            $table->foreignId('trainer_id');
-            $table->foreign('trainer_id')->references('employees')->on('id');
+        Schema::table('transformations', function (Blueprint $table) {
+            $table->string('period');
         });
     }
 
@@ -22,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('memberships', function (Blueprint $table) {
+        Schema::table('transformations', function (Blueprint $table) {
             //
         });
     }

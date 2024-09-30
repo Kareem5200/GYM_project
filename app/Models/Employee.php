@@ -33,9 +33,7 @@ class Employee extends Authenticatable
     ];
 
 
-    // public function users(){
-    //     return $this->belongsToMany(User::class,'trainer_user','trainer_id','user_id')->withPivot('status');
-    // }
+
 
     public function memberships(){
         return $this->hasMany(Membership::class,'trainer_id');
@@ -57,4 +55,12 @@ class Employee extends Authenticatable
         return $this->hasMany(WorkoutPlan::class,'trainer_id');
     }
 
+    public function transformations(){
+        return $this->hasMany(Transformation::class,'trainer_id');
+    }
+
+
+    public function scopeActive($query){
+       return  $query->whereStatus('active');
+    }
 }

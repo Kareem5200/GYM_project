@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
+use App\Events\DeactiveEmployeesEvent;
 use App\Helpers\CustomHelperFunctions;
 use App\Models\User;
 use App\Models\Employee;
@@ -44,7 +45,6 @@ class ManageTrainerControllers extends Controller
     }
 
     public function trainerProfile(Employee $trainer){
-
         return view('employees.admins.trainers.profile',compact('trainer'));
     }
 
@@ -75,6 +75,8 @@ class ManageTrainerControllers extends Controller
             $trainer->update([
                 'status'=>'deactive'
             ]);
+
+            // event(new DeactiveEmployeesEvent($trainer));
 
         }else{
 

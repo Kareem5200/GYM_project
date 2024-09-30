@@ -16,12 +16,14 @@ class checkTrainer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->has('trainer_id')){
-            $trainer = Employee::find($request->route('trainer_id'));
+
+        if($trainer_id = $request->route('trainer_id')){
+            $trainer = Employee::find($trainer_id);
 
         }else{
             $trainer = $request->route('trainer');
         }
+
 
         if(!$trainer || $trainer->status == 'deactive' || $trainer->department->status == 'deactive' ){
             abort(403);

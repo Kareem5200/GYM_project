@@ -29,4 +29,8 @@ class Department extends Model
     public function memberships(){
         return $this->hasMany(Membership::class,'department_id');
     }
+
+    public function scopeActive($query){
+        return  $query->whereStatus('active');
+     }
 }
