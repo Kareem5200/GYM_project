@@ -10,9 +10,8 @@
 @section('content')
 <div class='container'>
 
-    @session('success')
-    <div class="alert alert-success"> {{  session('success') }} </div>
-    @endsession
+    <x-alert name='success' alert_type='alert-success'/>
+    
     <table class="table">
         <thead class="thead-dark">
             <tr>

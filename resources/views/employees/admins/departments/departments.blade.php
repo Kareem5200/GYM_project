@@ -10,13 +10,9 @@
 
 
 @section('content')
-@if(session('success'))
-<div class="alert alert-success">{{session('success')  }}</div>
-@endif
+
 
 <nav class="flex px-5 my-8 py-3 text-gray-700  rounded-lg bg-gray-50 dark:bg-[#1E293B] " aria-label="Breadcrumb">
-
-
     <ol class="inline-flex items-center space-x-1 md:space-x-3">
         <li class="inline-flex items-center">
             <a href="#"
@@ -45,6 +41,10 @@
     </ol>
 </nav>
 
+<x-alert name='success' alert_type='alert-success'/>
+<x-alert name='error'/>
+
+
 
 
 
@@ -69,7 +69,7 @@
                 <p class="mt-1 text-black text-xl text-bold  uppercase">
                     {{ $department->period }}
                 </p>
-         
+
                 <div class="flex gap-4 my-5">
                     <button>
                         <a href="{{ route('employees.displayDepartment',$department->id) }}"
@@ -96,9 +96,9 @@
     </div>
     @endforeach
 
-
 </div>
 
+{{ $departments->links() }}
 
 @endsection
 

@@ -2,12 +2,18 @@
 
 namespace App\Providers;
 
+use App\Events\ActiveEmployeeEvent;
+use App\Events\ActiveEmployeesEvent;
+use App\Events\DeactiveEmployeeEvent;
+use Illuminate\Support\Facades\Event;
 use App\Events\DeactiveEmployeesEvent;
-use App\Listeners\DeactiveEmployeesListener;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\ActiveEmployeeListener;
+use App\Listeners\ActiveEmployeesListener;
+use App\Listeners\DeactiveEmployeeListener;
+use App\Listeners\DeactiveEmployeesListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,9 +26,19 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        DeactiveEmployeeEvent::class=>[
+            DeactiveEmployeeListener::class
+        ],
         DeactiveEmployeesEvent::class=>[
             DeactiveEmployeesListener::class,
         ],
+        ActiveEmployeeEvent::class=>[
+            ActiveEmployeeListener::class,
+        ],
+        ActiveEmployeesEvent::class=>[
+            ActiveEmployeesListener::class,
+        ],
+
     ];
 
     /**

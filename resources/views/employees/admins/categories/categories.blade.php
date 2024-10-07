@@ -11,9 +11,7 @@
 
 @section('content')
 <div class="report-container">
-    @if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    <x-alert name='success' alert_type='alert-success'/>
     <div class="report-header">
         <h1 class="recent-Articles">All Categories</h1>
 

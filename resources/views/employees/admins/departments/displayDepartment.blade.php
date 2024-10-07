@@ -38,6 +38,7 @@
 
 <div class="container my-5">
     <div class="d-flex justify-content-center flex-wrap gap-4">
+        <x-alert name='error' />
         @foreach($trainers as $trainer) <!-- Adjust the number of cards by changing the loop limit -->
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('images/employees_images/'.$trainer->image) }}" class="card-img-top" alt="trainer image">
@@ -57,6 +58,7 @@
         </div>
         @endforeach
     </div>
+    {{$trainers->links()}}
 </div>
 
 

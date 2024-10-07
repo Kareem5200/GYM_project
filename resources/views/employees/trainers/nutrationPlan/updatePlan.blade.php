@@ -12,9 +12,7 @@
         @csrf
         @method('PATCH')
 
-        @session('error')
-         <div class="alert alert-danger"> {{  session('error') }} </div>
-        @endsession
+        <x-alert name='error'/>
 
 
         <div class="form-floating mb-3">
@@ -34,21 +32,9 @@
         @enderror
 
 
-        <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="floatingInput" name="start_date">
-            <label for="floatingInput">Start Date</label>
-        </div>
-        @error('start_date')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        <x-input type="date" name="start_date">Start Date</x-input>
+        <x-input type="date" name="end_date">End Date</x-input>
 
-        <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="floatingInput" name="end_date" >
-            <label for="floatingInput">End Date</label>
-        </div>
-        @error('end_date')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
         <button class="btn btn-success">Update</button>
     </form>
 </div>

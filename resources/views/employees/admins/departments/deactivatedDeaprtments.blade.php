@@ -10,9 +10,8 @@
 
 
 @section('content')
-@if(session('success'))
-<div class="alert alert-success">{{session('success')  }}</div>
-@endif
+
+ <x-alert name='success' alert_type='alert-success'/>
 
 <nav class="flex px-5 my-8 py-3 text-gray-700  rounded-lg bg-gray-50 dark:bg-[#1E293B] " aria-label="Breadcrumb">
 
@@ -65,7 +64,7 @@
                     {{ $department->status }}
                 </p>
                 <div class="flex gap-4 my-5">
-       
+
 
                     <form action="{{ route('employees.changeStatus',$department->id) }}" method="POST">
                         @csrf

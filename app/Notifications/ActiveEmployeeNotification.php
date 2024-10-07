@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MembershipCreatedNotification extends Notification
+class ActiveEmployeeNotification extends Notification
 {
     use Queueable;
 
@@ -35,9 +35,11 @@ class MembershipCreatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Atom GYM')
+                    ->line("We are happy for you $notifiable->name")
+                    ->line('You return back for our GYM')
+                    ->line('You can make login for our website')
+                    ->action('Login', url('/employees/loginForm'));
     }
 
     /**

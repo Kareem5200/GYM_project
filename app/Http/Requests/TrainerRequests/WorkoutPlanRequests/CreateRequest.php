@@ -48,6 +48,7 @@ class CreateRequest extends FormRequest
                               ->category('workoutPlan')->first();
 
 
+            
             if($plan_Exists){
                 return $validator->errors()->add('days','The user has plan at this day');
 

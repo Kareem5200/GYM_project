@@ -7,10 +7,7 @@
 
 
 @section('content')
-    @session('success')
-            <div class="alert alert-success"> {{  session('success') }} </div>
-    @endsession
-
+<x-alert name='success' alert_type='alert-success'/>
 <div class='container'>
     @foreach ($plan_days as $day)
     <div class="card" style="width: 18rem;">

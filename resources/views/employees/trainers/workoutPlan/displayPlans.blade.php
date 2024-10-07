@@ -7,9 +7,8 @@
 
 
 @section('content')
-    @session('success')
-            <div class="alert alert-success"> {{  session('success') }} </div>
-    @endsession
+
+    <x-alert name='success' alert_type='alert-success'/>
 
 <div class='container'>
     @foreach ($workout_plans as $plan )

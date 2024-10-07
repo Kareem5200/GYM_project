@@ -5,11 +5,11 @@
 
 
 @section('content')
-<form action="{{ route('employees.createCategory') }}" method="POST">
-@csrf
-    @if (session('error'))
-     <div class="alert alert-ganger">{{ session('error')}}</div>
-    @endif
+ <form action="{{ route('employees.createCategory') }}" method="POST">
+    @csrf
+
+
+    <x-alert name='error'/>
     <label for="">Category</label>
     <select class="form-select" name="category" aria-label="Default select example">
         <option selected>Open this select menu</option>
@@ -38,14 +38,8 @@
         <div class="alert alert-ganger">{{ $message }}</div>
       @enderror
 
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Price</label>
-        <input type="number" name="price" class="form-control" id="exampleFormControlInput1">
-      </div>
 
-      @error('price')
-        <div class="alert alert-ganger">{{ $message }}</div>
-      @enderror
+      <x-input name='price' type="number">Price</x-input>
 
     <fieldset>
     <legend>Which plan do you require?</legend>

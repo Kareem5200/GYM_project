@@ -5,9 +5,8 @@ namespace App\Listeners;
 use App\Notifications\DeactiveEmployeeNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Notification;
 
-class DeactiveEmployeesListener
+class DeactiveEmployeeListener
 {
     /**
      * Create the event listener.
@@ -22,6 +21,6 @@ class DeactiveEmployeesListener
      */
     public function handle(object $event): void
     {
-        Notification::send($event->trainers,new DeactiveEmployeeNotification());
+        $event->trainer->notify(new DeactiveEmployeeNotification());
     }
 }

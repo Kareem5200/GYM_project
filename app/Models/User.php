@@ -70,7 +70,7 @@ class User extends Authenticatable
     {
         return $user->whereHas('memberships', function($query) {
             $query->where('trainer_id', Auth::guard('employees')->id())
-              ->where('end_date', '>=', now());
+              ->where('end_date','>=',now()->toDateString());
         });
     }
 
@@ -79,7 +79,7 @@ class User extends Authenticatable
     {
         return $user->whereHas($plan, function($query) {
             $query->where('trainer_id',Auth::guard('employees')->id())
-            ->where('end_date','>=',now());
+            ->where('end_date','>=',now()->toDateString());
         });
     }
 
@@ -88,7 +88,7 @@ class User extends Authenticatable
     {
         return $user->whereDoesntHave($plan, function($query) {
             $query->where('trainer_id',Auth::guard('employees')->id())
-            ->where('end_date','>=',now());
+            ->where('end_date','>=',now()->toDateString());
         });
     }
 

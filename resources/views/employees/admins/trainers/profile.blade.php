@@ -11,9 +11,9 @@
 <!-- Student Profile -->
 <div class="student-profile py-4">
     <div class="container">
-        @if (session('success'))
-            <div  class="alert alert-success">{{session('success')  }}</div>
-        @endif
+
+        <x-alert name='success' alert_type='alert-success'/>
+
       <div class="row">
         <div class="col-lg-4">
           <div class="card shadow-sm">

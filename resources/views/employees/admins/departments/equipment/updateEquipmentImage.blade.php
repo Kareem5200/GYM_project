@@ -13,15 +13,9 @@
             @csrf
             @method('PATCH')
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Image</span>
-                    <input type="file"  name="image"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                </div>
-                @error('image')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+            <x-input name="image" type="file">Image</x-input>
 
-            <button class="btn btn-success">Create</button>
+            <button class="btn btn-success">Update</button>
         </form>
     </div>
 </div>

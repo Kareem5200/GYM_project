@@ -34,7 +34,7 @@ class Membership extends Model
     }
 
     public function scopeActiveMembership($membership){
-        return $membership->where('end_date','>=',now());
+        return $membership->where('end_date','>=',now()->toDateString());
     }
     public function scopeCategory($membership,$plan){
         return $membership->whereHas('category',function($category)use($plan){

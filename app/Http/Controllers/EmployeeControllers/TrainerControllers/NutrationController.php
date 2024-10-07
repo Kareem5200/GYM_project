@@ -15,13 +15,13 @@ class NutrationController extends Controller
 {
     public function usersWithoutPlans(){
         //Get users that have memberships with auth trainer but the trainer didnot add plan for them
-        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withoutActivePlans('nutrationPlans')->get(['id','name','image','phone1','phone2']);
+        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withoutActivePlans('nutrationPlans')->select(['id','name','image','phone1','phone2'])->paginate();
         return view('employees.trainers.nutrationPlan.nutClientsWithoutPlans',compact('users'));
     }
 
     public function usersWithPlans(){
         //Get users that have memberships with auth trainer and the trainer added plan for them
-        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withActivePlans('nutrationPlans')->get(['id','name','image','phone1','phone2']);
+        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withActivePlans('nutrationPlans')->select(['id','name','image','phone1','phone2'])->paginate();
         return view('employees.trainers.nutrationPlan.nutClientsWithPlans',compact('users'));
     }
 

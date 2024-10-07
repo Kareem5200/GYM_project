@@ -7,10 +7,7 @@
 
 @section('content')
 
-@if (session('success'))
-<div class="alert alert-success">{{ session('success') }}</div>
-
-@endif
+<x-alert name='success' alert_type='alert-success'/>
 
 <a href="{{ route('employees.addEquipment') }}" class="btn btn-success">Add new equipment</a>
 @forelse ($equipment as $equip )

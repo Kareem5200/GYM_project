@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class DeactivateEmployeesNotification extends Notification
+class DeactiveEmployeeNotification extends Notification
 {
     use Queueable;
 
@@ -35,9 +35,11 @@ class DeactivateEmployeesNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Atom GYM')
+                    ->line("$notifiable->name Trainer we are sorry for you.")
+                    ->line('The manager decided for deactivating you.')
+                    ->line('Thank you for all time with us with best wishes.')
+                    ->line('With best wishes.');
     }
 
     /**

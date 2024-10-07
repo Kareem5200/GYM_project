@@ -29,18 +29,11 @@
 
                 </div>
                 <div class="divide-y divide-gray-200">
-                    @if (session('error'))
-                        <div  class="alert alert-danger">{{ session('error') }}</div>
-                    @endif
+                 <x-alert name='error'/>
                     <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                         <div class="flex flex-col">
-                            <label class="leading-loose capitalize">User ID</label>
-                            <input type="number" name="user_id"
-                                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                placeholder="ie.151505" value="{{ old('user_id') }}">
-                                @error('user_id')
-                                    <div  class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                            <x-input name="user_id" type="number" placeholder="ie.151505" value="{{ old('user_id') }}" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">User ID</x-input>
+
                         </div>
                         <div class="flex flex-col">
                             <label class="leading-loose capitalize">department name</label>
@@ -69,14 +62,11 @@
                         </div>
                         <div class="flex flex-wrap items-center space-x-4">
                             <div class="flex  flex-col">
-                                <label class="leading-loose">Start</label>
+                                <label class="leading-loose">Start Date</label>
                                 <div class="relative focus-within:text-gray-600 text-gray-400">
-                                    <input type="date" name="start_date"
-                                        class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="25/02/2020">
-                                        @error('start_date')
-                                            <div  class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+
+                                        <x-input name="start_date" type="date" placeholder="25/02/2020" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"/>
+
                                     <div class="absolute left-3 top-2">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">

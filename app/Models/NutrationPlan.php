@@ -29,6 +29,6 @@ class NutrationPlan extends Model
     }
 
     public function scopeActiveNutrationPlan($query){
-        return $query->where('end_date','>=',now());
+        return $query->where('end_date','>=',now()->toDateString());
     }
 }

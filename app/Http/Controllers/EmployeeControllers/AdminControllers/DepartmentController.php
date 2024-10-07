@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
-use App\Helpers\CustomHelperFunctions;
 use Exception;
 use App\Models\Equipment;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\DepartmentEquipment;
+use App\Events\ActiveEmployeesEvent;
+
 use App\Http\Controllers\Controller;
+use App\Events\DeactiveEmployeesEvent;
+use App\Helpers\CustomHelperFunctions;
 use App\Http\Controllers\EmployeeControllers\AuthController;
 use App\Http\Requests\AdminRequests\DepartmentRequests\CreateRequest;
 use App\Http\Requests\AdminRequests\DepartmentRequests\UpdateRequest;
@@ -20,9 +22,6 @@ class DepartmentController extends Controller
 
     protected function changeStatusDepartment($department,$status){
         $department->update([
-            'status'=>$status,
-        ]);
-        $department->trainers()->update([
             'status'=>$status,
         ]);
 
@@ -35,7 +34,7 @@ class DepartmentController extends Controller
 
 
     public function departments(){
-        $departments = Department::active()->get();
+        $departments = Department::active()->paginate(2);
         return view('employees.admins.departments.departments',compact('departments'));
     }
 
@@ -80,7 +79,7 @@ class DepartmentController extends Controller
     public function displayDepartment(Department $department){
 
         $categories = $department->categories()->withPivot('price')->wherePivot('status','active')->get();
-        $trainers = $department->trainers()->active()->get(['id','name','image']);
+        $trainers = $department->trainers()->active()->select(['id','name','image'])->paginate(4);
         $equipments = $department->equipment()->get(['id','image']);
 
         return view('employees.admins.departments.displayDepartment',compact('department','categories','trainers','equipments'));
@@ -93,15 +92,28 @@ class DepartmentController extends Controller
 
             try{
                 $this->changeStatusDepartment($department,'deactive');
+
+                $active_trainers = $department->trainers()->whereStatus('active');
+                $active_trainers->update([
+                    'status'=>'deactive',
+                ]);
+
+                $active_trainers = $active_trainers->get();
+                event(new DeactiveEmployeesEvent($active_trainers));
+
                 DB::commit();
+
             }catch(Exception $exception){
+
                 DB::rollBack();
+
                 return redirect()->back()->with('error',$exception->getMessage());
             }
 
         }else{
 
             try{
+
                 $this->changeStatusDepartment($department,'active');
                 DB::commit();
             }catch(Exception $exception){

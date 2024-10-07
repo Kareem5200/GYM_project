@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\EmployeeControllers\AdminControllers;
 
-use App\Events\DeactiveEmployeesEvent;
-use App\Helpers\CustomHelperFunctions;
+use Exception;
 use App\Models\User;
 use App\Models\Employee;
+use App\Models\WorkoutPlan;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TrainersRequests\CreateRequest;
 use App\Models\NutrationPlan;
 use App\Models\Qualification;
-use App\Models\WorkoutPlan;
+use Illuminate\Support\Facades\DB;
+use App\Events\ActiveEmployeeEvent;
+use App\Http\Controllers\Controller;
+use App\Events\DeactiveEmployeeEvent;
+use App\Events\DeactiveEmployeesEvent;
+use App\Helpers\CustomHelperFunctions;
+use App\Notifications\DeactiveEmployeesNotification;
+use App\Http\Requests\TrainersRequests\CreateRequest;
 
 class ManageTrainerControllers extends Controller
 {
@@ -70,22 +75,34 @@ class ManageTrainerControllers extends Controller
 
     public function  changeTrainerStatus(Employee $trainer){
 
-        if($trainer->status == 'active'){
 
-            $trainer->update([
-                'status'=>'deactive'
-            ]);
+        DB::beginTransaction();
 
-            // event(new DeactiveEmployeesEvent($trainer));
+        try{
 
-        }else{
+            if($trainer->status == 'active'){
+                $trainer->update([
+                    'status'=>'deactive'
+                ]);
 
-            if($trainer->department->status == 'deactive'){
-                return redirect()->back()->with('error','The department of trainer is deactivated');
+                event(new DeactiveEmployeeEvent($trainer));
+
+            }else{
+
+                if($trainer->department->status == 'deactive'){
+                    return redirect()->back()->with('error','The department of trainer is deactivated');
+                }
+                $trainer->update([
+                    'status'=>'active'
+                ]);
+                
+                event(new ActiveEmployeeEvent($trainer));
+
             }
-            $trainer->update([
-                'status'=>'active'
-            ]);
+            DB::commit();
+        }catch(Exception $exception){
+            DB::rollBack();
+            return redirect()->back()->with('error', $exception->getMessage());
         }
 
 

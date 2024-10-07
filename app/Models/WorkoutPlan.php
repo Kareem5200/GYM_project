@@ -32,7 +32,7 @@ class WorkoutPlan extends Model
     }
 
     public function scopeActiveWorkoutPlan($query){
-        return $query->where('end_date','>=',now());
+        return $query->where('end_date','>=',now()->toDateString());
     }
     public function scopeUserWorkoutPlans($query,$user_id){
         return $query->where(['user_id'=>$user_id,'trainer_id'=>Auth::guard('employees')->id()]);
