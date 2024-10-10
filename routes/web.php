@@ -14,14 +14,14 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Auth::routes();
 
 Route::group([
     'prefix'=>LaravelLocalization::setLocale(), //localhost/en/......
-    'middleware'=>['localeCookieRedirect','localeSessionRedirect'],
+    'middleware'=>['localeCookieRedirect','localizationRedirect'],
 ],function()
 {
 
+    Auth::routes();
     Route::get('/', function () {
          return view('welcome');
 

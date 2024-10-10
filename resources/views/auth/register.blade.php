@@ -74,6 +74,19 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('inbody') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" class="form-control @error('inbody') is-invalid @enderror" name="inbody" value="{{ old('inbody') }}" required autocomplete="inbody">
+                                @error('inbody')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="phone1" class="col-md-4 col-form-label text-md-end">{{ __('phone1') }}</label>
 
                             <div class="col-md-6">
@@ -100,33 +113,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="weight" class="col-md-4 col-form-label text-md-end">{{ __('weight') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="weight" type="number" class="form-control @error('weight') is-invalid @enderror" name="weight" value="{{ old('weight') }}" required autocomplete="weight" autofocus>
-
-                                @error('weight')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="height" class="col-md-4 col-form-label text-md-end">{{ __('height') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="height" type="number" class="form-control @error('height') is-invalid @enderror" name="height" value="{{ old('height') }}" required autocomplete="height" autofocus>
-
-                                @error('height')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
 
                         <div class="row mb-3">
                             <label for="birth_date" class="col-md-4 col-form-label text-md-end">{{ __('birth_date') }}</label>
