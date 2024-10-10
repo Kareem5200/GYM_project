@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +14,29 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-     return view('welcome');
+Route::group([
+    'prefix'=>LaravelLocalization::setLocale(), //localhost/en/......
+    'middleware'=>['localeCookieRedirect','localeSessionRedirect'],
+],function()
+{
+
+    Route::get('/', function () {
+         return view('welcome');
+
+    });
+
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
 
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 

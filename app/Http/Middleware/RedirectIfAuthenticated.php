@@ -22,11 +22,11 @@ class RedirectIfAuthenticated
         if(Auth::guard('employees')->check()){
 
             if(Auth::guard('employees')->user()->type == 'admin'){
-                
+
                 return to_route('employees.index');
 
             }elseif(Auth::guard('employees')->user()->type == 'trainer'){
-
+                return to_route('employees.trainerIndex');
             }
         }
 

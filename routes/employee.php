@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeeControllers\AuthController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
     Route::middleware(['guest:employees','guest'])->group(function(){
         Route::view('/loginForm', 'employees.Auth.login')->name('LoginForm');
 
-        Route::controller(App\Http\Controllers\EmployeeControllers\AuthController::class)->group(function(){
+    Route::controller(App\Http\Controllers\EmployeeControllers\AuthController::class)->group(function(){
             Route::get('/registerForm','registerForm')->name('registerForm');
             Route::post('/register','register')->name('register');
             Route::post('/login','login')->middleware('throttle:5,5')->name('login');
