@@ -22,7 +22,7 @@ return [
     'Pass'=>'Password',
     'Confirm Pass'=>'Confrm Password',
     'Remember'=>'Remember Me',
-    'Forget'=>'Forget Your Password',
+    'Forget'=>'Forget Your Password ?',
     'Name'=>'Name',
     'Image'=>'Profile Image',
     'Inbody'=>'Inbody',

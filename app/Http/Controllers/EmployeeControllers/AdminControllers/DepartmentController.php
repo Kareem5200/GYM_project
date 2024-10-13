@@ -34,7 +34,7 @@ class DepartmentController extends Controller
 
 
     public function departments(){
-        $departments = Department::active()->paginate(2);
+        $departments = Department::active()->get();
         return view('employees.admins.departments.departments',compact('departments'));
     }
 
@@ -94,12 +94,13 @@ class DepartmentController extends Controller
                 $this->changeStatusDepartment($department,'deactive');
 
                 $active_trainers = $department->trainers()->whereStatus('active');
+                $active_trainers_data = $active_trainers->get();
+
                 $active_trainers->update([
                     'status'=>'deactive',
                 ]);
 
-                $active_trainers = $active_trainers->get();
-                event(new DeactiveEmployeesEvent($active_trainers));
+                event(new DeactiveEmployeesEvent($active_trainers_data));
 
                 DB::commit();
 

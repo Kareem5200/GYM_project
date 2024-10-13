@@ -22,6 +22,7 @@ class DeactiveEmployeesListener
      */
     public function handle(object $event): void
     {
+
         Notification::send($event->trainers,new DeactiveEmployeeNotification());
     }
 }

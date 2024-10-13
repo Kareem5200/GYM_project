@@ -22,10 +22,13 @@ Route::group([
 {
 
     Auth::routes();
-    Route::get('/',[App\Http\Controllers\UserControllers\WelcomeController::class,'index']);
-
-
+    Route::get('/',[App\Http\Controllers\UserControllers\WelcomeController::class,'index'])->middleware(['guest','guest:employees']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::controller(App\Http\Controllers\UserControllers\DepartmentController::class)->group(function(){
+            Route::get('/displayDepartment/{department}','displayDepartment')->middleware('checkDepartment')->name('displayDepartment');
+            Route::get('/aboutTrainer/{trainer_id}','aboutTrainer')->middleware('checkTrainer')->name('aboutTrainer');
+    });
 
 
 

@@ -15,13 +15,14 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('auth.Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <x-input name="name" value="{{ old('name') }}" required />
+                                {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
                         </div>
 
@@ -61,11 +62,11 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('auth.Image') }}</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('auth.Image') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file" class="form-control @error('profile_image') is-invalid @enderror" name="profile_image" value="{{ old('profile_image') }}" required autocomplete="profile_image">
-                                @error('profile_image')
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image">
+                                @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -74,10 +75,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('auth.Inbody') }}</label>
+                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('auth.Inbody') }} ({{ __('Optional') }})</label>
 
                             <div class="col-md-6">
-                                <input type="file" class="form-control @error('inbody') is-invalid @enderror" name="inbody" value="{{ old('inbody') }}" required autocomplete="inbody">
+                                <input type="file" class="form-control @error('inbody') is-invalid @enderror" name="inbody" value="{{ old('inbody') }}"  autocomplete="inbody">
                                 @error('inbody')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,20 +94,6 @@
                                 <input id="phone1" type="text" class="form-control @error('phone1') is-invalid @enderror" name="phone1" value="{{ old('phone1') }}" required autocomplete="phone1" autofocus>
 
                                 @error('phone1')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="phone2" class="col-md-4 col-form-label text-md-end">{{ __('auth.Phone2') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="phone2" type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ old('phone2') }}"  autocomplete="phone2" autofocus>
-
-                                @error('phone2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

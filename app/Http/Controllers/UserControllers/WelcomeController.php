@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 class WelcomeController extends Controller
 {
     public function index(){
-
-        $departments = Department::active()->get();
-        $equipment = Equipment::select('image')->paginate(2);
-        return view('welcome',compact('departments','equipment'));
+        return view('welcome');
     }
 }

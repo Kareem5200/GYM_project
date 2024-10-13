@@ -13,11 +13,9 @@
   <div class="container w-50">
     <div class="title">Registration</div>
     <div class="content">
-        @if (session('error'))
-        <div class="alert alert-danger">
-                {{session('error')}}
-        </div>
-        @endif
+
+        <x-alert name="error"/>
+        
       <form action="{{ route('employees.register') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="user-details">

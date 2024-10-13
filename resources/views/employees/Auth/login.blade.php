@@ -16,9 +16,7 @@
       <h2>Login</h2>
 
 
-        @if(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
+      <x-alert name="error"/>
 
         <div class="input-field">
         <input type="email" name="email" required>

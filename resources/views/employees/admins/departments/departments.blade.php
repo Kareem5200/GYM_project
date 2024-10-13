@@ -98,7 +98,7 @@
 
 </div>
 
-{{ $departments->links() }}
+
 
 @endsection
 
