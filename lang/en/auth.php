@@ -25,10 +25,14 @@ return [
     'Forget'=>'Forget Your Password',
     'Name'=>'Name',
     'Image'=>'Profile Image',
-    'inbody'=>'Inbody',
+    'Inbody'=>'Inbody',
     'Phone1'=>'Phone 1',
     'Phone2'=>'Phone 2',
     'Birth'=>'Birth Date',
-    'gender'=>'Gender',
+    'Gender'=>'Gender',
     'Logout'=>'Logout',
+    'Male'=>'Male',
+    'Female'=>'Female',
+    'Select Gender'=>'Select Gender',
+
 ];

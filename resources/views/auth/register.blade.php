@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('auth.Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('auth.Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('auth.Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('auth.Pass') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('auth.Confirm Pass') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('profile_image') }}</label>
+                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('auth.Image') }}</label>
 
                             <div class="col-md-6">
                                 <input type="file" class="form-control @error('profile_image') is-invalid @enderror" name="profile_image" value="{{ old('profile_image') }}" required autocomplete="profile_image">
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('inbody') }}</label>
+                            <label for="profile_image" class="col-md-4 col-form-label text-md-end">{{ __('auth.Inbody') }}</label>
 
                             <div class="col-md-6">
                                 <input type="file" class="form-control @error('inbody') is-invalid @enderror" name="inbody" value="{{ old('inbody') }}" required autocomplete="inbody">
@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone1" class="col-md-4 col-form-label text-md-end">{{ __('phone1') }}</label>
+                            <label for="phone1" class="col-md-4 col-form-label text-md-end">{{ __('auth.Phone1') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone1" type="text" class="form-control @error('phone1') is-invalid @enderror" name="phone1" value="{{ old('phone1') }}" required autocomplete="phone1" autofocus>
@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone2" class="col-md-4 col-form-label text-md-end">{{ __('phone2') }}</label>
+                            <label for="phone2" class="col-md-4 col-form-label text-md-end">{{ __('auth.Phone2') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone2" type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ old('phone2') }}"  autocomplete="phone2" autofocus>
@@ -116,7 +116,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="birth_date" class="col-md-4 col-form-label text-md-end">{{ __('birth_date') }}</label>
+                            <label for="birth_date" class="col-md-4 col-form-label text-md-end">{{ __('auth.Birth') }}</label>
 
                             <div class="col-md-6">
                                 <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autocomplete="birth_date" autofocus>
@@ -132,13 +132,13 @@
 
 
                         <div class="row mb-3">
-                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('gender') }}</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('auth.Gender') }}</label>
 
                             <div class="col-md-6">
                                 <select name="gender">
-                                    <option value="">Select your gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="">{{ __('auth.Select Gender') }}</option>
+                                    <option value="male">{{ __('auth.Male') }}</option>
+                                    <option value="female">{{ __('auth.Female') }}</option>
                                 </select>
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
@@ -152,7 +152,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('auth.Register') }}
                                 </button>
                             </div>
                         </div>
