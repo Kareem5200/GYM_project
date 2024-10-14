@@ -24,7 +24,7 @@ class Membership extends Model
         return  $this->belongsTo(User::class,'user_id');
     }
     public function trainer(){
-        return  $this->belongsTo(User::class,'trainer_id');
+        return  $this->belongsTo(Employee::class,'trainer_id');
     }
     public function department(){
         return  $this->belongsTo(Department::class,'department_id');

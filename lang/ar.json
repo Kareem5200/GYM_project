@@ -32,18 +32,33 @@
     "Choose your pricing plan":"اختر خطة التسعير الخاصة بك",
     "Online coaching service":"خدمة التدريب عبر الإنترنت",
     "We have no trainers for online coaching now":"ليس لدينا مدربين للتدريب عبر الإنترنت الآن",
-     "We have no memberships now":"ليس لدينا اشتراكات الآن",
-     "About trainer":"عن المدرب",
-     "Our Trainer":"حول المدرب",
-     "Contact with trainer":"تواصل مع المدرب",
-     "Workout Plan":"خطه تدريب",
-     "We have no Workout Plan now":"ليس لدينا خطه تدريب الان",
-     "Nutration Plan":"خطه تغذيه",
-     "We have no nutration Plan now":"ليس لدينا خطه تغذيه الان",
-     "Trainer certifications":"شهادات المدرب",
-     "Trainer transformtions":"تحولات المدرب",
-     "Before":"قبل",
-     "After":"بعد"
+    "We have no memberships now":"ليس لدينا اشتراكات الآن",
+    "About trainer":"عن المدرب",
+    "Our Trainer":"حول المدرب",
+    "Contact with trainer":"تواصل مع المدرب",
+    "Workout Plan":"خطه تدريب",
+    "We have no Workout Plan now":"ليس لدينا خطه تدريب الان",
+    "Nutration Plan":"خطه تغذيه",
+    "We have no nutration Plan now":"ليس لدينا خطه تغذيه الان",
+    "Trainer certifications":"شهادات المدرب",
+    "Trainer transformtions":"تحولات المدرب",
+    "Before":"قبل",
+    "After":"بعد",
+    "Update":"تحديث",
+    "Profile":"الصفحه الشخصيه",
+    "Your Memberships":"الاشتراكات الخاصه بك",
+    "Add/Update Your Inbody":"اضافه/تحديث صوره التحليل الشخصي الخاص بك",
+    "Member ID":"رقم المشترك",
+    "Department":"القسم",
+    "Start Date":"تاريخ البدء",
+    "End Date":"تاريخ الانتهاء",
+    "Category":"فئه",
+    "Trainer":"المدرب",
+    "You have no active memberships":"ليس لديك اشتراكات فعاله",
+    "Has no trainer":"ليس لديك مدرب"
+
+
+
 
 
 }

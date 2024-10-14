@@ -19,6 +19,9 @@
             <p class="card-text">Phone 2 : {{ $user->phone2  ?? 'Has no second phone'}}</p>
             <a href="{{ route('employees.addNutrationPlan',$user->id) }}" class="btn btn-primary">Add Plan</a>
             <a href="{{ route('employees.displayNutrationPlans',$user->id) }}" class="btn btn-primary">View Plans</a>
+            <a href="{{ asset('images/inbody/'.$user->inbody) }}" target="_blank">
+                <button class="btn btn-success">Inbody Image</button>
+            </a>
             </div>
         </div>
     @endforeach

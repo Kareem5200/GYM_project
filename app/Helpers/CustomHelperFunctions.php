@@ -9,7 +9,7 @@ class CustomHelperFunctions {
 
     public static function storeImage(object $input,string $path):string{
         $manager = new ImageManager(new Driver());
-        $input_scaled = $manager->read($input)->scale(255, 255);
+        $input_scaled = $manager->read($input)->scale(400,400);
         $extension = $input->getClientOriginalExtension();
         $image_name = time().'.'.$extension;
         $path = public_path($path);

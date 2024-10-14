@@ -19,16 +19,20 @@ class DashboardController extends Controller
 
 
         $users_without_nutration_plan = Membership::where('trainer_id',Auth::guard('employees')->id())->activeMembership()
-                                        ->whereHas('user',function($query){
-                                            $query->doesntHave('nutrationPlans');
+                                        ->whereHas('user',function($user){
+                                            $user->whereDoesntHave('nutrationPlans',function($plan){
+                                                $plan->activeNutrationPlan();
+                                            });
                                         })
                                         ->category('nutrationPlan')->count();
 
         $users_without_workout_plan = Membership::where('trainer_id',Auth::guard('employees')->id())->activeMembership()
                                         ->whereHas('user',function($query){
-                                            $query->doesntHave('workoutPlans');
+                                            $query->whereDoesntHave('workoutPlans',function($plan){
+                                                $plan->activeWorkoutPlan();
+                                            });
                                         })
-                                        ->category('workoutPlans')->count();
+                                        ->category('workoutPlan')->count();
 
         return view('employees.trainers.dashboard',compact('all_nutration_plan_memberships','all_workout_plan_memberships','users_without_nutration_plan','users_without_workout_plan'));
 

@@ -24,11 +24,21 @@ Route::group([
     Auth::routes();
     Route::get('/',[App\Http\Controllers\UserControllers\WelcomeController::class,'index'])->middleware(['guest','guest:employees']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::view('/updateInbody','users.inbody')->name('updateInbody');
+    Route::view('/profile','users.profile')->name('profile');
+    Route::view('/memberships','users.memberships')->name('memberships');
 
     Route::controller(App\Http\Controllers\UserControllers\DepartmentController::class)->group(function(){
             Route::get('/displayDepartment/{department}','displayDepartment')->middleware('checkDepartment')->name('displayDepartment');
             Route::get('/aboutTrainer/{trainer_id}','aboutTrainer')->middleware('checkTrainer')->name('aboutTrainer');
     });
+
+
+    Route::controller(App\Http\Controllers\UserControllers\UserController::class)->group(function(){
+        Route::patch('/editInbody','editInbody')->name('editInbody');
+    });
+
+
 
 
 

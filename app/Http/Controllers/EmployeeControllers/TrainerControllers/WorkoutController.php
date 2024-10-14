@@ -15,13 +15,13 @@ class WorkoutController extends Controller
 {
     public function usersWithoutPlans(){
 
-        $users = User::withoutActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->select(['id','name','image','phone1','phone2'])->paginate();
+        $users = User::withoutActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->select(['id','name','image','phone1','phone2','inbody'])->paginate();
         return view('employees.trainers.workoutPlan.workClientsWithoutPlans',compact('users'));
     }
 
     public function usersWithPlans(){
 
-        $users = User::withActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->select(['id','name','image','phone1','phone2'])->paginate();
+        $users = User::withActivePlans('workoutPlans')->withActiveMemberships()->categoryPlan('workoutPlan')->select(['id','name','image','phone1','phone2','inbody'])->paginate();
         return view('employees.trainers.workoutPlan.workClientsWithPlans',compact('users'));
 
     }

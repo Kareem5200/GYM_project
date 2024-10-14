@@ -15,32 +15,19 @@ class NutrationController extends Controller
 {
     public function usersWithoutPlans(){
         //Get users that have memberships with auth trainer but the trainer didnot add plan for them
-        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withoutActivePlans('nutrationPlans')->select(['id','name','image','phone1','phone2'])->paginate();
+        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withoutActivePlans('nutrationPlans')->select(['id','name','image','phone1','phone2','inbody'])->paginate();
         return view('employees.trainers.nutrationPlan.nutClientsWithoutPlans',compact('users'));
     }
 
     public function usersWithPlans(){
         //Get users that have memberships with auth trainer and the trainer added plan for them
-        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withActivePlans('nutrationPlans')->select(['id','name','image','phone1','phone2'])->paginate();
+        $users = User::withActiveMemberships()->categoryPlan('nutrationPlan')->withActivePlans('nutrationPlans')->select(['id','name','image','phone1','phone2','inbody'])->paginate();
         return view('employees.trainers.nutrationPlan.nutClientsWithPlans',compact('users'));
     }
 
     public function createNutrationPlan(CreateRequest $request,$user_id){
         $trainer_id = Auth::guard('employees')->id();
 
-        //To cannot add the exists meal except snacks
-        // if($request->meal != 'snacks'){
-        //     $meal_exists = NutrationPlan::activeNutrationPlan()->where(['user_id'=>$user_id,'days'=>$request->days,'meal'=>$request->meal])->exists();
-        //     if($meal_exists){
-        //             return redirect()->back()->with('error','Meal exists');
-        //     }
-        // }
-
-        //To check plan end date no be after membership date
-        // $membership = Membership::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id])->activeMembership()->category('nutrationPlan')->first();
-        // if($request->end_date > $membership->end_date){
-        //     return redirect()->back()->with('error','End date is after user membership end date');
-        // }
         $request->merge([
             'user_id'=>$user_id,
             'trainer_id'=>$trainer_id,
