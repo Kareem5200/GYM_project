@@ -8,6 +8,9 @@
 @section('content')
 
 
+<x-alert name="success" alert_type="alert-success"/>
+
+
     <div class="receipts-wrapper">
         @forelse (Auth::user()->memberships()->activeMembership()->get() as $membership )
        <div class="receipts mx-5">

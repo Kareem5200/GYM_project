@@ -26,7 +26,7 @@
     "3months":"3 اشهر",
     "6months":"6 اشهر",
     "9months":"9 اشهر",
-    "year":"سنه",
+    "1year":"سنه",
     "Enroll now":"سجل الان",
     "Our Plan":"خطتنا",
     "Choose your pricing plan":"اختر خطة التسعير الخاصة بك",
@@ -55,7 +55,12 @@
     "Category":"فئه",
     "Trainer":"المدرب",
     "You have no active memberships":"ليس لديك اشتراكات فعاله",
-    "Has no trainer":"ليس لديك مدرب"
+    "Has no trainer":"ليس لديك مدرب",
+    "You cannot not make membership please check your active memberships":"لا يمكنك عمل عضويه من فضلك افحص عضوياتك الفعاله",
+    "The payment is canceled":"تم الغاء عمليه الدفع",
+    "You must upload your inbody when make workout or nutration membership":"يجب اضافه صوره التحليل الشخصي الخاص بك قبل الاتشراك في خطه التدريب او التغذيه",
+    "Error in payment process":"حدث خطاء في عمليه الدفع",
+    "You have new membership":"لديك عضويه جديده"
 
 
 

@@ -35,13 +35,15 @@ Route::group([
         Route::view('/updateInbody','users.inbody')->name('updateInbody');
         Route::view('/profile','users.profile')->name('profile');
         Route::view('/memberships','users.memberships')->name('memberships');
+        Route::view('/updateProfile','users.updateProfile')->name('updateProfile');
 
         Route::controller(App\Http\Controllers\UserControllers\UserController::class)->group(function(){
             Route::patch('/editInbody','editInbody')->name('editInbody');
+            Route::patch('/editProfile','editProfile')->name('editProfile');
         });
 
         Route::controller(App\Http\Controllers\PaypalController::class)->group(function(){
-            Route::get('/payment','payment')->name('payment');
+            Route::get('/payment','payment')->name('payment')->middleware('checkPayment');
             Route::get('/cancel','cancel')->name('payment.cancel');
             Route::get('/payment/success','success')->name('payment.success');
         });

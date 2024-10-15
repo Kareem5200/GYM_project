@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\UserControllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\CustomHelperFunctions;
-use App\Models\User;
+use Illuminate\Validation\Rule;
+
 
 class UserController extends Controller
 {
+
+
+
     public function editInbody(Request $request){
 
         $request->validate([
@@ -23,6 +28,20 @@ class UserController extends Controller
             'inbody'=>$inbody,
         ]);
 
-        return to_route('home');
+        return to_route('profile');
+    }
+
+
+    public function editProfile(Request $request){
+        $user = Auth::user();
+        $request->validate([
+            'phone1'=>['required','regex:/^01[0125][0-9]{8}$/', Rule::unique('users')->ignore($user->id),]
+        ]);
+
+        $user->update([
+            'phone1'=>$request->phone1,
+        ]);
+
+        return to_route('profile');
     }
 }

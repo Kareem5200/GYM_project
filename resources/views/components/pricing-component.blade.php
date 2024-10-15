@@ -2,7 +2,7 @@
     'categories',
     'title',
     'alert',
-    'trainer'=>'',
+    'trainer'=>null,
     'department',
 
 ])
@@ -41,10 +41,13 @@
                             //use it to pay
                             Session::put('price',$category->pivot->price);
                             //Use in validations
+                            Session::put('category_id',$category->id);
                             Session::put('category',$category->category);
                             Session::put('plan',$category->plan);
-                            Session::put('trainer_id',$trainer);
-                            Session::put('department',$department);
+                            Session::put('department_id',$department->id);
+                            if(!is_null($trainer)){
+                                Session::put('trainer_id',$trainer);
+                            }
 
                         @endphp
                         <button class="primary-btn pricing-btn">{{ __('Enroll now') }}</button>

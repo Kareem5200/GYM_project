@@ -73,6 +73,7 @@ class Kernel extends HttpKernel
         'checkWorkoutUser'=>\App\Http\Middleware\checkWorkoutUser::class,
         'checkWorkoutPlan'=>\App\Http\Middleware\checkWorkoutPlan::class,
         'checkNutrationPlan'=>\App\Http\Middleware\checkNutrationPlan::class,
+        'checkPayment'=>\App\Http\Middleware\PaymentMiddleware::class,
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
