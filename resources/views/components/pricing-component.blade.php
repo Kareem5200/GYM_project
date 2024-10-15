@@ -1,7 +1,9 @@
 @props([
     'categories',
     'title',
-    'alert'
+    'alert',
+    'trainer'=>'',
+    'department',
 
 ])
 
@@ -33,7 +35,20 @@
                         <li>{{ __('Month to mouth') }}</li>
                         <li>{{ __('No time restriction') }}</li>
                     </ul>
-                    <a href="#" class="primary-btn pricing-btn">{{ __('Enroll now') }}</a>
+                    <form action="{{ route('payment') }}" method="get">
+                        @php
+
+                            //use it to pay
+                            Session::put('price',$category->pivot->price);
+                            //Use in validations
+                            Session::put('category',$category->category);
+                            Session::put('plan',$category->plan);
+                            Session::put('trainer_id',$trainer);
+                            Session::put('department',$department);
+
+                        @endphp
+                        <button class="primary-btn pricing-btn">{{ __('Enroll now') }}</button>
+                    </form>
                 </div>
                 </div>
             @empty

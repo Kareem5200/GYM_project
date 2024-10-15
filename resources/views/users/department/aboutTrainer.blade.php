@@ -85,8 +85,8 @@
 
 
 
-    <x-pricing-component :categories="$nutration_categories" title="Nutration Plan" alert='We have no nutration Plan now'/>
-    <x-pricing-component :categories="$workout_categories" title="Workout Plan" alert="We have no Workout Plan now" />
+    <x-pricing-component :categories="$nutration_categories" :department="$department" :trainer="$trainer->id" title="Nutration Plan" alert='We have no nutration Plan now'/>
+    <x-pricing-component :categories="$workout_categories" :department="$department" :trainer="$trainer->id" title="Workout Plan" alert="We have no Workout Plan now" />
 
 
 

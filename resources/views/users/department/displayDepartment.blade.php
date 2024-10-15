@@ -42,7 +42,7 @@
 
         <!-- Pricing Section Begin -->
 
-        <x-pricing-component :categories="$categories" title="Our Plan" alert='We have no memberships now' />
+        <x-pricing-component :categories="$categories" :department="$department" title="Our Plan" alert='We have no memberships now'  />
 
         {{-- <section class="pricing-section spad">
             <div class="container">
