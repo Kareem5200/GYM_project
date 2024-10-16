@@ -29,7 +29,7 @@ class CreateRequest extends FormRequest
             'muscle'=>['required',new muscleCheck],
             'days'=>['required',new daysCheck],
             'plan'=>['required','string'],
-            'start_date'=>['required','date','after_or_equal:'.now(),'before_or_equal:'.now()->addDays(10)],
+            'start_date'=>['required','date','after_or_equal:'.now()->toDateString(),'before_or_equal:'.now()->addDays(10)->toDateString()],
             'end_date'=>['required','date','after:start_date'],
         ];
     }
@@ -41,14 +41,14 @@ class CreateRequest extends FormRequest
 
             //Check if plan exists
             $plan_Exists = WorkoutPlan::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id,'days'=>$this->days])
-                            ->where('end_date','>=',now())->exists();
+                            ->where('end_date','>=',now()->toDateString())->exists();
 
             //To check the end date of plan not after the date of membership
             $membership = Membership::where(['trainer_id'=> $trainer_id,'user_id'=>$user_id])->activeMembership()
                               ->category('workoutPlan')->first();
 
 
-            
+
             if($plan_Exists){
                 return $validator->errors()->add('days','The user has plan at this day');
 

@@ -60,7 +60,10 @@
     "The payment is canceled":"تم الغاء عمليه الدفع",
     "You must upload your inbody when make workout or nutration membership":"يجب اضافه صوره التحليل الشخصي الخاص بك قبل الاتشراك في خطه التدريب او التغذيه",
     "Error in payment process":"حدث خطاء في عمليه الدفع",
-    "You have new membership":"لديك عضويه جديده"
+    "You have new membership":"لديك عضويه جديده",
+    "You have no workout plan":"ليس لديك اي خطه تمرين",
+    "You have no nutration plan":"ليس لديك اي خطه تغذيه",
+    "Get Plan":"احصل علي الخطه"
 
 
 

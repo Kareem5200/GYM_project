@@ -7,11 +7,50 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\CustomHelperFunctions;
+use App\Models\NutrationPlan;
+use App\Models\WorkoutPlan;
 use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
 {
+
+    public function checkPlan($plan){
+        if($plan->user != auth()->user() || $plan->end_date < now()->toDateString()){
+            abort(403);
+        }
+    }
+
+    public function getworkoutplans(){
+
+        $workout_info = WorkoutPlan::activeWorkoutPlan()->where('user_id',auth()->id())->get(['id','days','muscle']);
+        return view('users.Workout.workoutPlans',compact('workout_info'));
+    }
+
+    
+    public function getworkoutPlan(WorkoutPlan $workout_plan){
+        $this->checkPlan($workout_plan);
+        return view('users.Workout.getWorkoutPlan',compact('workout_plan'));
+    }
+
+    public function getDaysOfNutration(){
+        $nutration_days = NutrationPlan::activeNutrationPlan()->where('user_id',auth()->id())->groupBy('days')->get('days');
+        return view('users.Nutration.daysOfNutration',compact('nutration_days'));
+    }
+
+    public function getMealsOfDay($day){
+        $nutration_meals = NutrationPlan::activeNutrationPlan()->where(['days'=>$day,'user_id'=>auth()->id()])->get(['id','meal']);
+        return view('users.Nutration.nutrationMeals',compact('nutration_meals'));
+    }
+
+    public function getNutrationPlan(NutrationPlan $nutration_plan){
+        $this->checkPlan($nutration_plan);
+        return view('users.Nutration.displayNutartionPlan',compact('nutration_plan'));
+    }
+
+
+
+
 
 
 

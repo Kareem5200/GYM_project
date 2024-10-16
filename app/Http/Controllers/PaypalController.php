@@ -40,6 +40,7 @@ class PaypalController extends Controller
     }
 
     public function cancel(){
+        
         return redirect()->back()->with('paymentError',Lang::get('The payment process is canceled'));
 
     }
@@ -55,7 +56,6 @@ class PaypalController extends Controller
             $end_date = date('Y-m-d',strtotime("+".Session::get('category'),strtotime(now()->toDateString())));
 
             Session::has('trainer_id') ? $trainer_id = Session::get('trainer_id'):$trainer_id = null;
-
 
             Membership::create([
                 'user_id'=>auth()->id(),

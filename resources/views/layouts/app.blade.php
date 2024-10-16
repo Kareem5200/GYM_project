@@ -77,10 +77,10 @@
                         @else
 
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Workout Plan') }}</a>
+                            <a class="nav-link" href="{{ route('getworkoutplans') }}">{{ __('Workout Plan') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Nutration Plan') }}</a>
+                            <a class="nav-link" href="{{ route('getDaysOfNutration') }}">{{ __('Nutration Plan') }}</a>
                         </li>
 
 

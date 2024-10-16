@@ -40,6 +40,12 @@ Route::group([
         Route::controller(App\Http\Controllers\UserControllers\UserController::class)->group(function(){
             Route::patch('/editInbody','editInbody')->name('editInbody');
             Route::patch('/editProfile','editProfile')->name('editProfile');
+            Route::get('/getworkoutplans','getworkoutplans')->name('getworkoutplans');
+            Route::get('/getDaysOfNutration','getDaysOfNutration')->name('getDaysOfNutration');
+            Route::get('/getworkoutPlan/{workout_plan}','getworkoutPlan')->name('getworkoutPlan');
+            Route::get('/getMealsOfDay/{day}','getMealsOfDay')->name('getMealsOfDay');
+            Route::get('/getNutrationPlan/{nutration_plan}','getNutrationPlan')->name('getNutrationPlan');
+
         });
 
         Route::controller(App\Http\Controllers\PaypalController::class)->group(function(){

@@ -30,7 +30,7 @@ class CreateRequest extends FormRequest
             'days'=>['required',new daysCheck],
             'plan'=>['required','string'],
             'supplements'=>['nullable','string','max:255'],
-            'start_date'=>['required','date','after_or_equal:'.now(),'before_or_equal:'.now()->addDays(10)],
+            'start_date'=>['required','date','after_or_equal:'.now()->toDateString(),'before_or_equal:'.now()->addDays(10)->toDateString()],
             'end_date'=>['required','date','after:start_date'],
         ];
     }

@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
         return [
             'plan'=>['required','string'],
             'supplements'=>['nullable','string','max:255'],
-            'start_date'=>['nullable','date','after_or_equal:'.now(),'before_or_equal:'.now()->addDays(10)],
+            'start_date'=>['nullable','date','after_or_equal:'.now()->toDateString(),'before_or_equal:'.now()->addDays(10)->toDateString()],
             'end_date'=>['nullable','date','after:start_date'],
         ];
     }

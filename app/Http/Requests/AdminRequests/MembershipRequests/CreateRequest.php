@@ -34,7 +34,7 @@ class CreateRequest extends FormRequest
         $validator->after(function($validator){
 
             $membership_exists = Membership::where(['user_id'=>$this->user_id,'department_id'=>$this->department_id])
-                                ->activeMembership()->exists();
+                                ->activeMembership()->category('withoutPlans')->exists();
 
             if($membership_exists){
             return $validator->errors()->add('user_id','This user has active membership');
