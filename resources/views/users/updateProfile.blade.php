@@ -6,10 +6,8 @@
     @csrf
     @method('PATCH')
 
-    <x-input name="phone1" >New Phone</x-input>
-
-
-    <button class="btn btn-success">Update</button>
+    <x-input name="phone1" >{{ __('New Phone') }}</x-input>
+    <button class="btn btn-success">{{ __('Update') }}</button>
 </form>
 
 

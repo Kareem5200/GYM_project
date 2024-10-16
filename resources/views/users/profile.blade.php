@@ -21,8 +21,8 @@
 
 
                 <div class=" d-flex mt-2">
-                    <a class="btn1 btn-dark text-center pt-2 mx-2" href="{{ route('updateProfile') }}">Edit Profile</a>
-                    <a class="btn1 btn-dark text-center pt-2" href="{{ asset('images/inbody/'.$user->inbody) }}">Open Inbody</a>
+                    <a class="btn1 btn-dark text-center pt-2 mx-2" href="{{ route('updateProfile') }}">{{ __('Edit Profile') }}</a>
+                    <a class="btn1 btn-dark text-center pt-2" href="{{ asset('images/inbody/'.$user->inbody) }}">{{ __('Open Inbody') }}</a>
                  </div> <div class="text mt-3">
                     <span class="text-center">ID : {{ $user->id }}</span><br>
                     <span>{{ $user->phone1 }}</span>

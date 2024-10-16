@@ -9,7 +9,7 @@
 
 <div class="card m-5 " style="width: 18rem;">
     <div class="card-body text-center">
-    <h2 class="card-title">{{ $plan->days}}</h2>
+    <h2 class="card-title">{{ $plan->days }}</h2>
     <a href="{{ route('getMealsOfDay',$plan->days) }}" class="card-link">{{ __('Get Plan') }}</a>
 
     </div>
