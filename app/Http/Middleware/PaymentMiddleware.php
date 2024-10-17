@@ -22,28 +22,7 @@ class PaymentMiddleware
 
         //Get data from session for validation
         $plan = Session::get('plan');
-        $category= Session::get('category');
-        $trainer_id=Session::get('trainer_id');
         $department_id=Session::get('department_id');
-
-
-
-        // if($plan == "withoutPlans"){
-
-        //     $membership_exists = Membership::activeMembership()->where(['user_id'=>auth()->id(),'department_id'=>$department_id])
-        //                         ->category($plan)->exists();
-
-        // }elseif($plan == "workoutPlan"){
-            //     $membership_exists = Membership::activeMembership()->where(['user_id'=>auth()->id(),'department_id'=>$department_id])
-            //                         ->category("workoutPlan")->exists();
-
-
-            // }elseif($plan == "nutrationPlan"){
-
-            //     $membership_exists = Membership::activeMembership()->where('user_id',auth()->id())->category("nutrationPlan")->exists();
-
-            // }
-
 
         //Validation process
 
