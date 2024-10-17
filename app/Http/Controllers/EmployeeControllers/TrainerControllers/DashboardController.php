@@ -41,7 +41,9 @@ class DashboardController extends Controller
 
 
     public function markNotification(DatabaseNotification $notification){
-        $notification->markAsRead();
+        if($notification->unread()){
+            $notification->markAsRead();
+        }
         return to_route($notification->data['route']);
     }
 }
