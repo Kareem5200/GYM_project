@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('title')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     @yield('css')
 </head>
 <body>
@@ -63,6 +65,31 @@
                 </li>
                 </ul>
               </li>
+
+
+              @php
+                  $unread = auth()->user()->unreadNotifications()->count();
+              @endphp
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                    <span class="{{  $unread == 0 ?'': 'badge rounded-pill badge-notification bg-danger ' }} ">{{ $unread == 0 ? "" : $unread}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  @forelse( auth()->user()->notifications as $notification)
+
+                  <li><a class="dropdown-item {{ $notification->unread() ? 'fw-bold' : '' }}"  href="{{ route('employees.markNotification',$notification->id) }}">
+                    <img src="{{asset('images/users_images/'.$notification->data['image'] )}}" alt="Notification Image" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                    {{ $notification->data['body']  }}    {{ $notification->created_at->diffForHumans() }}</a></li>
+
+                  @empty
+                    <h5>You have no notifications</h5>
+                  @endforelse
+                </ul>
+              </li>
+
+
+
             </ul>
           </div>
         </div>

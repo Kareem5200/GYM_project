@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
-
+use App\Events\TrainerMembershipsEvent;
 use App\Models\Membership;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Facades\PayPal;
@@ -40,7 +39,7 @@ class PaypalController extends Controller
     }
 
     public function cancel(){
-        
+
         return redirect()->back()->with('paymentError',Lang::get('The payment process is canceled'));
 
     }
@@ -65,6 +64,11 @@ class PaypalController extends Controller
                 'start_date'=>now()->toDateString(),
                 'end_date'=>$end_date,
             ]);
+
+
+            TrainerMembershipsEvent::dispatchIf(!is_null($trainer_id),$trainer_id,Session::get('plan'));
+
+
 
             Session::forget(['department_id','category_id','category','plan','price','trainer_id']);
 

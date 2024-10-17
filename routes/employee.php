@@ -35,6 +35,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(App\Http\Controllers\EmployeeControllers\AdminControllers\DashboardController::class)->group(function(){
                 Route::get('/index','index')->name('index');
+
             });
 
 
@@ -130,6 +131,7 @@ Route::prefix('/employees')->name('employees.')->group(function(){
 
             Route::controller(\App\Http\Controllers\EmployeeControllers\TrainerControllers\DashboardController::class)->group(function(){
                 Route::get('/trainerIndex','trainerIndex')->name('trainerIndex');
+                Route::get('/notification/{notification}','markNotification')->name('markNotification');
                 Route::view('/trainerProfile','employees.trainers.profile')->name('trainerProfile');
                 Route::view('/trainerQualifications','employees.trainers.qualifications')->name('trainerQualifications');
             });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\EmployeeControllers\TrainerControllers;
 use App\Models\Membership;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -36,5 +37,11 @@ class DashboardController extends Controller
 
         return view('employees.trainers.dashboard',compact('all_nutration_plan_memberships','all_workout_plan_memberships','users_without_nutration_plan','users_without_workout_plan'));
 
+    }
+
+
+    public function markNotification(DatabaseNotification $notification){
+        $notification->markAsRead();
+        return to_route($notification->data['route']);
     }
 }

@@ -7,11 +7,13 @@ use App\Events\ActiveEmployeesEvent;
 use App\Events\DeactiveEmployeeEvent;
 use Illuminate\Support\Facades\Event;
 use App\Events\DeactiveEmployeesEvent;
+use App\Events\TrainerMembershipsEvent;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\ActiveEmployeeListener;
 use App\Listeners\ActiveEmployeesListener;
 use App\Listeners\DeactiveEmployeeListener;
 use App\Listeners\DeactiveEmployeesListener;
+use App\Listeners\TrainerMembershipsListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -37,6 +39,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ActiveEmployeesEvent::class=>[
             ActiveEmployeesListener::class,
+        ],
+        TrainerMembershipsEvent::class=>[
+            TrainerMembershipsListener::class,
         ],
 
     ];
